@@ -235,6 +235,50 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4f0;color:#1a
   .proj-add-form{grid-template-columns:1fr 1fr;grid-template-rows:auto auto auto}
   .proj-row{grid-template-columns:1fr 100px 28px}
 }
+
+/* ── REINVESTIMENTO TAB ── */
+.reinv-intro{background:#fff;border:1px solid #e5e3db;border-radius:12px;padding:16px;margin-bottom:14px}
+.reinv-intro-title{font-size:11px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px}
+.reinv-intro-text{font-size:12px;color:#555;line-height:1.75;margin-bottom:14px}
+.reinv-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.reinv-stat{border-radius:8px;padding:10px 12px;text-align:center}
+.reinv-stat-val{font-size:18px;font-weight:600;margin-bottom:2px}
+.reinv-stat-label{font-size:10px}
+
+.mec-card{border-radius:12px;border:1px solid #e5e3db;overflow:hidden;margin-bottom:12px}
+.mec-header{padding:14px 16px;display:flex;align-items:flex-start;gap:12px}
+.mec-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;margin-top:1px}
+.mec-titles{flex:1}
+.mec-title{font-size:13px;font-weight:600;color:#1a1a18;margin-bottom:2px}
+.mec-sub{font-size:11px;color:#888}
+.mec-badge{font-size:10px;font-weight:600;padding:3px 9px;border-radius:8px;flex-shrink:0;margin-top:2px;white-space:nowrap}
+.mec-body{padding:0 16px 14px;background:#fff}
+.flow{display:flex;align-items:center;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.flow-step{font-size:11px;padding:4px 10px;border-radius:6px;border:1px solid #e5e3db;background:#f9f9f7;color:#555}
+.flow-arr{font-size:11px;color:#aaa;flex-shrink:0}
+.pros-cons{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pros,.cons{border-radius:8px;padding:9px 11px}
+.pros{background:#E1F5EE}.cons{background:#FCEBEB}
+.pros-title{font-size:10px;font-weight:700;color:#065f46;margin-bottom:5px}
+.cons-title{font-size:10px;font-weight:700;color:#A32D2D;margin-bottom:5px}
+.pc-item{font-size:11px;margin-bottom:3px;padding-left:13px;position:relative;line-height:1.45}
+.pc-item::before{position:absolute;left:0;font-size:10px;top:1px}
+.pros .pc-item{color:#065f46}.pros .pc-item::before{content:'✓'}
+.cons .pc-item{color:#A32D2D}.cons .pc-item::before{content:'×'}
+.mec1 .mec-header{background:#E1F5EE}.mec1 .mec-num{background:#1D9E75}
+.mec1 .mec-badge{background:#E1F5EE;color:#065f46;border:1px solid #5DCAA5}
+.mec2 .mec-header{background:#EEEDFE}.mec2 .mec-num{background:#7F77DD}
+.mec2 .mec-badge{background:#EEEDFE;color:#3C3489;border:1px solid #AFA9EC}
+.mec3 .mec-header{background:#fef3c7}.mec3 .mec-num{background:#c47a1a}
+.mec3 .mec-badge{background:#fef3c7;color:#92400e;border:1px solid #fcd34d}
+.inss-caveat{background:#f9f9f7;border:1px solid #e5e3db;border-radius:10px;padding:12px 14px;font-size:12px;color:#555;line-height:1.6;margin-bottom:12px}
+.inss-caveat strong{color:#1a1a18}
+.rec-card{border:1.5px solid #1a1a18;border-radius:12px;padding:16px;background:#fff;margin-bottom:4px}
+.rec-label{font-size:9.5px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px}
+.rec-title{font-size:13px;font-weight:600;color:#1a1a18;margin-bottom:8px}
+.rec-body{font-size:12px;color:#555;line-height:1.75}
+.rec-body strong{color:#1a1a18}
+@media(max-width:600px){.pros-cons,.reinv-stats{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -256,7 +300,12 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4f0;color:#1a
     <button class="mode-btn active" id="btnMeta" onclick="setMode('meta')">🎯 Meta de Gabriel</button>
     <div class="mode-sep"></div>
     <button class="mode-btn" id="btnFat" onclick="setMode('fat')">📋 Faturamento Real por Projeto</button>
+    <div class="mode-sep"></div>
+    <button class="mode-btn" id="btnReinv" onclick="setMode('reinvestimento')">♻️ Reinvestindo o Pro-labore</button>
   </div>
+
+  <!-- ── CALC CONTENT (hidden when reinvestimento tab is active) ── -->
+  <div id="calcContent">
 
   <!-- ── PARÂMETROS ── -->
   <div class="params">
@@ -491,6 +540,149 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4f0;color:#1a
     </div>
   </div>
 
+  </div><!-- /calcContent -->
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- ── REINVESTIMENTO TAB ── -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div id="reinvestContent" style="display:none">
+
+    <div class="sec-title">Reinvestindo o pro-labore na empresa</div>
+    <div class="sec-sub" style="margin-bottom:14px">Mecanismos disponíveis quando os sócios optam por não sacar o pro-labore — mantendo capital na empresa</div>
+
+    <div class="reinv-intro">
+      <div class="reinv-intro-title">Por que reinvestir?</div>
+      <div class="reinv-intro-text">Em fases iniciais, sacar todo o pro-labore <strong>drena o caixa</strong> antes de haver receita recorrente suficiente. Manter o valor na empresa permite financiar operações, reduzir dependência de crédito externo e construir capital próprio — mas cada mecanismo tem implicações contábeis, jurídicas e fiscais distintas.</div>
+      <div class="reinv-stats">
+        <div class="reinv-stat" style="background:#E1F5EE">
+          <div class="reinv-stat-val" style="color:#1D9E75">3</div>
+          <div class="reinv-stat-label" style="color:#065f46">mecanismos disponíveis</div>
+        </div>
+        <div class="reinv-stat" style="background:#ede9fe">
+          <div class="reinv-stat-val" style="color:#7F77DD">0%</div>
+          <div class="reinv-stat-label" style="color:#5b21b6">imposto s/ dividendos (hoje)</div>
+        </div>
+        <div class="reinv-stat" style="background:#fef3c7">
+          <div class="reinv-stat-val" style="color:#c47a1a;font-size:13px;padding-top:3px">sempre</div>
+          <div class="reinv-stat-label" style="color:#92400e">INSS é devido mesmo sem saque</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mec-card mec1">
+      <div class="mec-header">
+        <div class="mec-num">1</div>
+        <div class="mec-titles">
+          <div class="mec-title">Conta corrente de sócios</div>
+          <div class="mec-sub">O pro-labore é creditado nos livros da empresa, sem saída de caixa</div>
+        </div>
+        <div class="mec-badge">Mais simples</div>
+      </div>
+      <div class="mec-body">
+        <div class="flow">
+          <div class="flow-step">Pro-labore declarado</div><span class="flow-arr">→</span>
+          <div class="flow-step">Contabilizado como crédito do sócio</div><span class="flow-arr">→</span>
+          <div class="flow-step">Empresa deve ao sócio (passivo)</div><span class="flow-arr">→</span>
+          <div class="flow-step">Sócio saca quando quiser</div>
+        </div>
+        <div class="pros-cons">
+          <div class="pros">
+            <div class="pros-title">Vantagens</div>
+            <div class="pc-item">Sem burocracia — só contabilidade</div>
+            <div class="pc-item">Sócio pode sacar parcelado no futuro</div>
+            <div class="pc-item">Flexível: cada sócio decide o timing</div>
+          </div>
+          <div class="cons">
+            <div class="cons-title">Atenção</div>
+            <div class="pc-item">INSS ainda é devido mesmo sem saída de caixa</div>
+            <div class="pc-item">Cria passivo (dívida) da empresa com o sócio</div>
+            <div class="pc-item">Exige contabilidade organizada</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mec-card mec2">
+      <div class="mec-header">
+        <div class="mec-num">2</div>
+        <div class="mec-titles">
+          <div class="mec-title">Integralização de capital social</div>
+          <div class="mec-sub">O sócio usa o pro-labore para subscrever novas cotas da empresa</div>
+        </div>
+        <div class="mec-badge">Mais estratégico</div>
+      </div>
+      <div class="mec-body">
+        <div class="flow">
+          <div class="flow-step">Pro-labore creditado</div><span class="flow-arr">→</span>
+          <div class="flow-step">Sócio subscreve novas cotas</div><span class="flow-arr">→</span>
+          <div class="flow-step">Capital social aumenta</div><span class="flow-arr">→</span>
+          <div class="flow-step">Participação do sócio cresce</div>
+        </div>
+        <div class="pros-cons">
+          <div class="pros">
+            <div class="pros-title">Vantagens</div>
+            <div class="pc-item">Aumenta o capital oficial da empresa</div>
+            <div class="pc-item">Fortalece balanço para crédito e parceiros</div>
+            <div class="pc-item">Recompensa o sócio com maior equity</div>
+          </div>
+          <div class="cons">
+            <div class="cons-title">Atenção</div>
+            <div class="pc-item">Exige alteração contratual no CNPJ</div>
+            <div class="pc-item">INSS continua sendo devido normalmente</div>
+            <div class="pc-item">Pode diluir outros sócios se feito só por um</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mec-card mec3">
+      <div class="mec-header">
+        <div class="mec-num">3</div>
+        <div class="mec-titles">
+          <div class="mec-title">Mútuo do sócio (empréstimo à empresa)</div>
+          <div class="mec-sub">O sócio formaliza um empréstimo à empresa com contrato de mútuo</div>
+        </div>
+        <div class="mec-badge">Mais formal</div>
+      </div>
+      <div class="mec-body">
+        <div class="flow">
+          <div class="flow-step">Sócio recebe pro-labore</div><span class="flow-arr">→</span>
+          <div class="flow-step">Assina contrato de mútuo</div><span class="flow-arr">→</span>
+          <div class="flow-step">Devolve o valor à empresa</div><span class="flow-arr">→</span>
+          <div class="flow-step">Recebe de volta com juros no futuro</div>
+        </div>
+        <div class="pros-cons">
+          <div class="pros">
+            <div class="pros-title">Vantagens</div>
+            <div class="pc-item">Muito claro juridicamente</div>
+            <div class="pc-item">Sócio tem direito de receber com juros no futuro</div>
+            <div class="pc-item">Protege o sócio em caso de dissolução</div>
+          </div>
+          <div class="cons">
+            <div class="cons-title">Atenção</div>
+            <div class="pc-item">Deve cobrar juros (mín. TJLP/SELIC) ou Receita questiona</div>
+            <div class="pc-item">Juros recebidos pelo sócio são tributáveis (IRRF)</div>
+            <div class="pc-item">Mais burocrático — exige contrato formal</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="inss-caveat">
+      <strong>Ponto crítico — INSS é sempre devido:</strong> independente do mecanismo escolhido, se o pro-labore é declarado, o INSS patronal (20%) e o INSS do sócio (~11%) são devidos à Receita Federal mesmo que o dinheiro não saia da empresa. A empresa paga o INSS patronal e desconta o do sócio — só o valor líquido fica na conta corrente ou é reinvestido.
+    </div>
+
+    <div class="rec-card">
+      <div class="rec-label">Recomendação para o estágio inicial da YourWatt</div>
+      <div class="rec-title">Conta corrente de sócios + pro-labore mínimo + distribuição de lucros</div>
+      <div class="rec-body">
+        A estratégia mais usada por startups em fase pré-receita recorrente é: (1) definir um pro-labore baixo — no mínimo 1 salário mínimo (R$ 1.412) para fins de INSS — e (2) compensar a diferença via <strong>distribuição de lucros (dividendos)</strong>, que hoje não tem incidência de INSS nem IRPF no Brasil. Os valores não sacados ficam na conta corrente de sócios, formando uma reserva que pode ser retirada conforme o fluxo de caixa permitir. Consulte sempre um contador para adequar ao regime tributário escolhido.
+      </div>
+    </div>
+
+    <div style="height:24px"></div>
+  </div><!-- /reinvestContent -->
+
 </div>
 
 <script>
@@ -571,24 +763,34 @@ function setPartnerRegime(key, regime) {
 // ─────────────────────────────────────────────
 function setMode(mode) {
   currentMode = mode;
-  document.getElementById('btnMeta').classList.toggle('active', mode === 'meta');
-  document.getElementById('btnFat').classList.toggle('active', mode === 'fat');
-  document.getElementById('rowMeta').style.display = mode === 'meta' ? '' : 'none';
-  document.getElementById('rowMatheusRegime').style.display = mode === 'fat' ? '' : 'none';
-  document.getElementById('fatSection').style.display = mode === 'fat' ? '' : 'none';
-  document.getElementById('bonusPanelSection').style.display = mode === 'fat' ? '' : 'none';
+  const isReinv = mode === 'reinvestimento';
+  const isFat   = mode === 'fat';
+  const isMeta  = mode === 'meta';
 
-  if (mode === 'fat') {
+  document.getElementById('btnMeta').classList.toggle('active',  isMeta);
+  document.getElementById('btnFat').classList.toggle('active',   isFat);
+  document.getElementById('btnReinv').classList.toggle('active', isReinv);
+
+  document.getElementById('calcContent').style.display     = isReinv ? 'none' : '';
+  document.getElementById('reinvestContent').style.display  = isReinv ? '' : 'none';
+
+  document.getElementById('rowMeta').style.display           = isMeta ? '' : 'none';
+  document.getElementById('rowMatheusRegime').style.display  = isFat  ? '' : 'none';
+  document.getElementById('fatSection').style.display        = isFat  ? '' : 'none';
+  document.getElementById('bonusPanelSection').style.display = isFat  ? '' : 'none';
+
+  if (isFat) {
     const mLabel = matheusRegime === 'prolabore' ? 'Pro-labore' : 'PJ AN.III';
     document.getElementById('scenarioTitle').textContent = 'Cenários de regime para Gabriel — faturamento real';
     document.getElementById('scenarioSub').textContent = `Mesmo faturamento, diferentes regimes para Gabriel · Matheus em ${mLabel}`;
     document.getElementById('summarySubTitle').textContent = 'Remuneração líquida + bônus de indicação (Gabriel) + participação de lucros';
-  } else {
+  } else if (isMeta) {
     document.getElementById('scenarioTitle').textContent = 'Comparativo por cenário de Gabriel';
     document.getElementById('scenarioSub').textContent = 'Cada cenário determina o faturamento necessário para Gabriel atingir sua meta · Matheus sempre em pro-labore';
     document.getElementById('summarySubTitle').textContent = 'Inclui remuneração + participação de lucros';
   }
-  calc();
+
+  if (!isReinv) calc();
 }
 
 // ─────────────────────────────────────────────
