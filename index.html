@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YourWatt — Remuneração Gabriel & Matheus</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4f0;color:#1a1a18;min-height:100vh;line-height:1.5}
+
+/* ── HEADER ── */
+.page-header{background:#1a1a18;padding:32px 0 26px;text-align:center}
+.page-header h1{font-size:19px;font-weight:600;color:#fff;margin-bottom:3px;letter-spacing:-.2px}
+.page-header p{font-size:12px;color:#777;margin-bottom:14px}
+.pills{display:flex;justify-content:center;gap:6px;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;padding:3px 11px;border-radius:14px;font-size:10.5px;font-weight:500}
+.pill-g{background:rgba(127,119,221,.22);color:#a89ff7}
+.pill-m{background:rgba(30,107,74,.22);color:#6ee7b7}
+.pill-pl{background:rgba(5,150,105,.22);color:#6ee7b7}
+
+.container{max-width:1000px;margin:0 auto;padding:22px 16px}
+
+/* ── SLIDERS ── */
+.params{background:#fff;border:1px solid #e5e3db;border-radius:12px;padding:14px 16px;margin-bottom:14px}
+.p-section{font-size:9.5px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.7px;margin:12px 0 7px;padding-top:12px;border-top:1px solid #f0eee8}
+.p-section:first-child{margin-top:0;padding-top:0;border-top:none}
+.sl-row{display:flex;align-items:center;gap:10px;margin-bottom:7px}
+.sl-row:last-child{margin-bottom:0}
+.sl-label{font-size:11.5px;color:#555;min-width:230px}
+.sl-val{font-size:11.5px;font-weight:700;color:#1a1a18;min-width:68px;text-align:right}
+.params-summary{font-size:10px;color:#888;margin-top:8px;padding:6px 10px;background:#f9f9f7;border-radius:7px;border:1px solid #e5e3db;line-height:1.6}
+
+/* ── PL BLOCK ── */
+.pl-strip{background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:12px 16px;margin-bottom:14px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.pl-strip-title{font-size:11px;font-weight:700;color:#065f46;white-space:nowrap}
+.pl-kv{display:flex;flex-direction:column;align-items:center;background:#fff;border-radius:8px;padding:7px 14px;border:1px solid #bbf7d0;min-width:100px}
+.pl-kv-label{font-size:9.5px;color:#888;margin-bottom:1px;text-align:center}
+.pl-kv-val{font-size:17px;font-weight:700;color:#059669}
+.pl-kv-sub{font-size:9px;color:#aaa;margin-top:1px;text-align:center}
+.pl-note{font-size:10.5px;color:#065f46;line-height:1.5;flex:1;min-width:200px}
+
+/* ── SCENARIO SECTION TITLE ── */
+.sec-title{font-size:13px;font-weight:600;color:#1a1a18;margin-bottom:3px}
+.sec-sub{font-size:11.5px;color:#888;margin-bottom:12px}
+
+/* ── SCENARIO CARD ── */
+.scenario-card{background:#fff;border:1px solid #e5e3db;border-radius:12px;overflow:hidden;margin-bottom:12px;position:relative}
+.scenario-card.best{border:2px solid #f59e0b;box-shadow:0 2px 12px rgba(245,158,11,.15)}
+.best-tag{position:absolute;top:0;right:0;background:#f59e0b;color:#fff;font-size:8.5px;font-weight:700;padding:3px 10px;border-radius:0 10px 0 8px;letter-spacing:.3px}
+
+.sc-header{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid #f0eee8}
+.sc-badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:7px;font-size:10px;font-weight:700}
+.sc-fat{font-size:11px;color:#888}
+.sc-fat strong{color:#1a1a18;font-weight:700}
+.sc-fat-num{font-size:18px;font-weight:700;color:#1a1a18;text-align:right}
+.sc-fat-label{font-size:9.5px;color:#aaa;text-align:right}
+
+/* ── TWO-COLUMN BODY ── */
+.sc-body{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.sc-col{padding:14px 16px}
+.sc-col:first-child{border-right:1px solid #f0eee8}
+.sc-col-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;display:flex;align-items:center;gap:5px}
+.col-g .sc-col-title{color:#5b21b6}
+.col-m .sc-col-title{color:#1D9E75}
+
+/* ── BREAKDOWN ROWS ── */
+.brow{display:flex;justify-content:space-between;align-items:baseline;padding:4px 0;border-bottom:1px solid #f5f3ef;font-size:11.5px}
+.brow:last-child{border-bottom:none}
+.brow-label{color:#888}
+.brow-val{font-weight:600;color:#1a1a18}
+.brow-val.accent-g{color:#5b21b6}
+.brow-val.accent-m{color:#1D9E75}
+.brow-val.accent-pl{color:#059669}
+.brow-val.accent-exec{color:#c47a1a}
+.brow-val.accent-bonus{color:#f59e0b}
+.divider-row{height:1px;background:#e5e3db;margin:8px 0}
+
+/* ── TOTAL BOXES ── */
+.total-box{margin-top:10px;padding:10px 12px;border-radius:8px;display:flex;justify-content:space-between;align-items:center}
+.total-box-g{background:#ede9fe}
+.total-box-m{background:#d1fae5}
+.total-box-label{font-size:10.5px;font-weight:600}
+.total-box-label-g{color:#5b21b6}
+.total-box-label-m{color:#065f46}
+.total-box-val{font-size:19px;font-weight:700}
+.total-box-val-g{color:#5b21b6}
+.total-box-val-m{color:#059669}
+.total-box-sub{font-size:9.5px;margin-top:1px}
+.total-box-sub-g{color:#7c3aed}
+.total-box-sub-m{color:#047857}
+
+/* ── COMPARISON SUMMARY ── */
+.summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.sum-card{background:#fff;border:1px solid #e5e3db;border-radius:10px;padding:12px 13px;text-align:center}
+.sum-card.best-sum{border:2px solid #f59e0b;background:#fffbeb}
+.sum-regime{font-size:9.5px;font-weight:700;color:#888;margin-bottom:5px}
+.sum-total-m{font-size:18px;font-weight:700;color:#1D9E75}
+.sum-total-g{font-size:13px;font-weight:600;color:#7F77DD;margin-top:2px}
+.sum-label-small{font-size:9px;color:#aaa}
+
+/* ── DISTRIBUTION BAR ── */
+.distrib-card{background:#fff;border:1px solid #e5e3db;border-radius:10px;padding:12px 14px;margin-bottom:12px}
+.distrib-title{font-size:11px;font-weight:600;color:#555;margin-bottom:10px}
+.dbar-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.dbar-row:last-child{margin-bottom:0}
+.dbar-label{font-size:10px;color:#555;min-width:140px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dbar-track{flex:1;height:18px;background:#f0eee8;border-radius:4px;overflow:hidden;display:flex}
+.dseg{display:flex;align-items:center;justify-content:center;transition:width .3s;overflow:hidden}
+.dseg-txt{font-size:8.5px;font-weight:700;color:#fff;white-space:nowrap;padding:0 3px}
+.dbar-total{font-size:10.5px;font-weight:700;min-width:70px;text-align:right;color:#1a1a18}
+.dbar-legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.dleg{display:flex;align-items:center;gap:4px;font-size:10px;color:#888}
+.dleg-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+
+/* ── EXPLANATION ── */
+.exp-card{background:#fff;border:1px solid #e5e3db;border-radius:10px;padding:14px 16px}
+.exp-title{font-size:12px;font-weight:600;color:#1a1a18;margin-bottom:8px}
+.exp-body{font-size:11.5px;color:#555;line-height:1.75}
+.exp-body strong{color:#1a1a18}
+
+/* ── MODE TOGGLE ── */
+.mode-toggle{display:flex;align-items:center;gap:0;border:1px solid #e5e3db;border-radius:8px;overflow:hidden;margin-bottom:14px;background:#f9f9f7}
+.mode-btn{flex:1;padding:8px 14px;font-size:11.5px;font-weight:600;border:none;cursor:pointer;transition:background .15s,color .15s;background:transparent;color:#888}
+.mode-btn.active{background:#1a1a18;color:#fff}
+.mode-sep{width:1px;background:#e5e3db;flex-shrink:0}
+
+/* ── PROJECT MANAGER ── */
+.proj-manager{background:#fff;border:1px solid #e5e3db;border-radius:12px;overflow:hidden;margin-bottom:14px}
+.proj-manager-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #f0eee8;background:#fafaf8}
+.proj-manager-title{font-size:12px;font-weight:700;color:#1a1a18}
+.proj-total-pill{display:inline-flex;align-items:center;gap:6px;background:#1a1a18;color:#fff;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700}
+.proj-total-pill span{color:#6ee7b7}
+
+/* Add form */
+.proj-add-form{display:grid;grid-template-columns:1fr 140px 150px auto;gap:8px;padding:12px 16px;border-bottom:1px solid #f0eee8;background:#f9f9f7;align-items:center}
+.proj-input{border:1.5px solid #e5e3db;border-radius:7px;padding:7px 10px;font-size:12px;color:#1a1a18;font-family:inherit;outline:none;background:#fff;transition:border-color .15s;width:100%}
+.proj-input:focus{border-color:#1a1a18}
+.proj-input::placeholder{color:#bbb}
+.proj-val-wrap{display:flex;align-items:center;border:1.5px solid #e5e3db;border-radius:7px;background:#fff;padding:0 8px;transition:border-color .15s}
+.proj-val-wrap:focus-within{border-color:#1a1a18}
+.proj-val-prefix{font-size:11px;font-weight:700;color:#aaa;white-space:nowrap}
+.proj-val-input{border:none;outline:none;background:transparent;font-size:12px;font-weight:700;color:#1a1a18;width:100%;padding:7px 4px;font-family:inherit}
+.proj-select{border:1.5px solid #e5e3db;border-radius:7px;padding:7px 8px;font-size:12px;color:#1a1a18;font-family:inherit;outline:none;background:#fff;cursor:pointer;transition:border-color .15s;width:100%}
+.proj-select:focus{border-color:#1a1a18}
+.proj-add-btn{background:#1a1a18;color:#fff;border:none;border-radius:7px;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:opacity .15s}
+.proj-add-btn:hover{opacity:.85}
+.proj-add-btn:active{opacity:.7}
+
+/* Project list */
+.proj-list{max-height:280px;overflow-y:auto}
+.proj-list-empty{padding:28px 16px;text-align:center;color:#bbb;font-size:12px}
+.proj-row{display:grid;grid-template-columns:1fr 120px 140px 28px;gap:8px;align-items:center;padding:9px 16px;border-bottom:1px solid #f5f3ef;transition:background .1s}
+.proj-row:last-child{border-bottom:none}
+.proj-row:hover{background:#fafaf8}
+.proj-row-name{font-size:12px;font-weight:600;color:#1a1a18;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.proj-row-val{font-size:12px;font-weight:700;color:#1a1a18;text-align:right}
+.proj-lead-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:12px;font-size:10.5px;font-weight:700;white-space:nowrap}
+.proj-remove-btn{background:none;border:none;cursor:pointer;color:#ddd;font-size:14px;font-weight:700;border-radius:4px;padding:2px 5px;transition:color .15s,background .15s;line-height:1}
+.proj-remove-btn:hover{color:#ef4444;background:#fef2f2}
+
+/* Project footer totals */
+.proj-footer{display:flex;align-items:center;gap:16px;padding:10px 16px;background:#f9f9f7;border-top:1px solid #e5e3db;flex-wrap:wrap}
+.proj-foot-kv{display:flex;flex-direction:column}
+.proj-foot-label{font-size:9px;color:#aaa;text-transform:uppercase;letter-spacing:.5px}
+.proj-foot-val{font-size:13px;font-weight:700;color:#1a1a18}
+.proj-foot-divider{width:1px;height:28px;background:#e5e3db;flex-shrink:0}
+
+/* ── FAT RESULT STRIP ── */
+.fat-result-strip{background:#1a1a18;border-radius:10px;padding:11px 16px;margin-bottom:14px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.fat-result-kv{display:flex;flex-direction:column;align-items:center;min-width:80px}
+.fat-result-label{font-size:9px;color:#666;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.fat-result-val{font-size:17px;font-weight:700}
+.fat-result-val.col-w{color:#fff}
+.fat-result-val.col-g{color:#a89ff7}
+.fat-result-val.col-m{color:#6ee7b7}
+.fat-result-val.col-y{color:#fcd34d}
+.fat-result-divider{width:1px;height:36px;background:#333;flex-shrink:0}
+
+/* ── MATHEUS REGIME TOGGLE (fat mode) ── */
+.mreg-toggle{display:flex;border:1.5px solid #e5e3db;border-radius:7px;overflow:hidden;flex-shrink:0}
+.mreg-btn{padding:5px 13px;font-size:11px;font-weight:600;border:none;cursor:pointer;background:transparent;color:#888;transition:background .12s,color .12s;white-space:nowrap}
+.mreg-btn:not(:last-child){border-right:1px solid #e5e3db}
+.mreg-btn.mreg-active{background:#1a1a18;color:#fff}
+
+/* ── BONUS PANEL ── */
+.bonus-panel{background:#fff;border:1px solid #e5e3db;border-radius:12px;padding:14px 16px;margin-bottom:12px}
+.bonus-panel-title{font-size:12px;font-weight:700;color:#1a1a18;margin-bottom:3px}
+.bonus-panel-sub{font-size:11px;color:#888;margin-bottom:12px}
+.bonus-cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.bonus-card{border-radius:10px;padding:12px 14px;border:1.5px solid;display:flex;flex-direction:column;gap:0}
+.bonus-card-name{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;display:flex;align-items:center;gap:5px}
+.bonus-proj-list{font-size:10.5px;color:#666;line-height:1.7;margin-bottom:6px;list-style:none}
+.bonus-proj-list li{display:flex;justify-content:space-between;padding:1px 0}
+.bonus-proj-item-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:120px;color:#888}
+.bonus-proj-item-val{font-weight:600;color:#1a1a18;white-space:nowrap}
+.bonus-fat-sub{font-size:10px;color:#aaa;margin-bottom:8px}
+
+/* Regime toggle inside bonus card */
+.breg-toggle{display:flex;border-radius:6px;overflow:hidden;border:1px solid rgba(0,0,0,.12);margin-bottom:10px;flex-shrink:0}
+.breg-btn{flex:1;padding:4px 5px;font-size:9.5px;font-weight:600;border:none;cursor:pointer;background:rgba(255,255,255,.5);color:inherit;opacity:.55;transition:opacity .12s,background .12s;text-align:center;line-height:1.3}
+.breg-btn:not(:last-child){border-right:1px solid rgba(0,0,0,.1)}
+.breg-btn.breg-active{background:rgba(0,0,0,.12);opacity:1;font-weight:700}
+
+/* Bonus breakdown */
+.bonus-breakdown{background:rgba(255,255,255,.55);border-radius:7px;padding:8px 10px;border:1px solid rgba(0,0,0,.08);font-size:10.5px;margin-top:auto}
+.bbd-row{display:flex;justify-content:space-between;padding:2px 0;color:inherit;opacity:.7}
+.bbd-row.bbd-net{opacity:1;font-weight:700;padding-top:5px;margin-top:3px;border-top:1px solid rgba(0,0,0,.1)}
+.bbd-row.bbd-net span:last-child{font-size:14px}
+.bonus-gabriel-note{font-size:9.5px;opacity:.7;margin-top:6px;padding:5px 8px;border-radius:5px;background:rgba(0,0,0,.06);line-height:1.4}
+
+.bonus-total-row{display:flex;justify-content:space-between;align-items:center;padding-top:7px;border-top:1px solid}
+.bonus-total-label{font-size:10px;font-weight:600}
+.bonus-total-val{font-size:16px;font-weight:700}
+.bonus-outros-note{font-size:10px;color:#888;font-style:italic;margin-top:4px}
+
+/* ── EMPTY STATE ── */
+.fat-empty{text-align:center;padding:40px 20px;color:#bbb}
+.fat-empty-icon{font-size:36px;margin-bottom:10px}
+.fat-empty-text{font-size:13px;font-weight:500;color:#ccc;margin-bottom:6px}
+.fat-empty-sub{font-size:11px;color:#ddd}
+
+/* ── PARTNER COLORS ── */
+.lc-gabriel{background:#ede9fe;border-color:#c4b5fd;color:#5b21b6}
+.lc-matheus{background:#d1fae5;border-color:#6ee7b7;color:#065f46}
+.lc-renio{background:#dbeafe;border-color:#93c5fd;color:#1e40af}
+.lc-rodrigo{background:#fef3c7;border-color:#fcd34d;color:#92400e}
+.lc-aquiles{background:#e0f2fe;border-color:#7dd3fc;color:#075985}
+.lc-lucas{background:#f3f4f6;border-color:#d1d5db;color:#374151}
+.lc-outros{background:#fdf4ff;border-color:#e879f9;color:#86198f}
+
+@media(max-width:680px){
+  .sc-body{grid-template-columns:1fr}
+  .sc-col:first-child{border-right:none;border-bottom:1px solid #f0eee8}
+  .summary-grid{grid-template-columns:repeat(2,1fr)}
+  .proj-add-form{grid-template-columns:1fr 1fr;grid-template-rows:auto auto auto}
+  .proj-row{grid-template-columns:1fr 100px 28px}
+}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Remuneração Gabriel & Matheus — por Cenário</h1>
+  <p>YourWatt Energia Solar · Modo meta ou faturamento real com projetos individuais</p>
+  <div class="pills">
+    <span class="pill pill-g">Gabriel · regime variável</span>
+    <span class="pill pill-m">Matheus · Pro-labore fixo</span>
+    <span class="pill pill-pl">Participação de lucros · 0,5% cada sócio</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ── MODE TOGGLE ── -->
+  <div class="mode-toggle">
+    <button class="mode-btn active" id="btnMeta" onclick="setMode('meta')">🎯 Meta de Gabriel</button>
+    <div class="mode-sep"></div>
+    <button class="mode-btn" id="btnFat" onclick="setMode('fat')">📋 Faturamento Real por Projeto</button>
+  </div>
+
+  <!-- ── PARÂMETROS ── -->
+  <div class="params">
+    <div class="p-section">Parâmetros do projeto</div>
+
+    <!-- Meta mode only -->
+    <div id="rowMeta">
+      <div class="sl-row">
+        <span class="sl-label">Meta mensal de Gabriel</span>
+        <input type="range" min="2000" max="15000" value="5000" step="100" id="sTarget" oninput="calc()">
+        <span class="sl-val" id="vTarget">R$ 5.000</span>
+      </div>
+    </div>
+
+    <!-- Fat mode: regime de Matheus -->
+    <div id="rowMatheusRegime" style="display:none">
+      <div class="sl-row" style="align-items:center;padding-top:4px">
+        <span class="sl-label" style="color:#1D9E75;font-weight:500">🟢 Regime de recebimento — Matheus</span>
+        <div class="mreg-toggle">
+          <button class="mreg-btn mreg-active" id="mregPL"  onclick="setMatheusRegime('prolabore')">Pro-labore</button>
+          <button class="mreg-btn"             id="mregPJIII" onclick="setMatheusRegime('pjiii')">PJ AN.III</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="sl-row" id="rowBonusPct">
+      <span class="sl-label">% bônus por indicação de lead</span>
+      <input type="range" min="0" max="10" value="5" step="0.5" id="sBonus" oninput="calc()">
+      <span class="sl-val" id="vBonus">5%</span>
+    </div>
+    <div class="sl-row">
+      <span class="sl-label">Pool de funcionários (% do faturamento)</span>
+      <input type="range" min="2" max="15" value="6" step="0.5" id="sPool" oninput="calc()">
+      <span class="sl-val" id="vPool">6%</span>
+    </div>
+
+    <div class="p-section">Prêmio executivo de Matheus (CEO · CTO · CFO)</div>
+    <div class="sl-row">
+      <span class="sl-label" style="color:#c47a1a;font-weight:500">👤 Prêmio CEO (% do pool)</span>
+      <input type="range" min="0" max="25" value="12" step="1" id="sCeo" style="accent-color:#c47a1a" oninput="calc()">
+      <span class="sl-val" id="vCeo">12%</span>
+    </div>
+    <div class="sl-row">
+      <span class="sl-label" style="color:#2563eb;font-weight:500">💻 Prêmio CTO (% do pool)</span>
+      <input type="range" min="0" max="25" value="8" step="1" id="sCto" style="accent-color:#2563eb" oninput="calc()">
+      <span class="sl-val" id="vCto">8%</span>
+    </div>
+    <div class="sl-row">
+      <span class="sl-label" style="color:#059669;font-weight:500">💰 Prêmio CFO (% do pool)</span>
+      <input type="range" min="0" max="25" value="10" step="1" id="sCfo" style="accent-color:#059669" oninput="calc()">
+      <span class="sl-val" id="vCfo">10%</span>
+    </div>
+
+    <div class="p-section">Participação de lucros</div>
+    <div class="sl-row">
+      <span class="sl-label">Total destinado a lucros (% do faturamento)</span>
+      <input type="range" min="0" max="10" value="3" step="0.5" id="sLucro" style="accent-color:#059669" oninput="calc()">
+      <span class="sl-val" id="vLucro">3%</span>
+    </div>
+    <div class="sl-row">
+      <span class="sl-label">Número de sócios (divisão igualitária)</span>
+      <input type="range" min="2" max="8" value="6" step="1" id="sSocios" style="accent-color:#059669" oninput="calc()">
+      <span class="sl-val" id="vSocios">6 sócios</span>
+    </div>
+
+    <div class="params-summary" id="paramsSummary"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- ── FAT MODE: PROJECT MANAGER ── -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div id="fatSection" style="display:none">
+
+    <div class="proj-manager">
+      <div class="proj-manager-header">
+        <div class="proj-manager-title">📋 Projetos do Mês</div>
+        <div class="proj-total-pill" id="projTotalPill">
+          <span id="projCount">0 projetos</span> · Total: <span id="projTotalVal">R$ 0</span>
+        </div>
+      </div>
+
+      <!-- Add form -->
+      <div class="proj-add-form">
+        <input class="proj-input" type="text" id="projName" placeholder="Nome do projeto / cliente…" onkeydown="if(event.key==='Enter')addProject()">
+        <div class="proj-val-wrap">
+          <span class="proj-val-prefix">R$</span>
+          <input class="proj-val-input" type="number" id="projVal" placeholder="0" min="0" step="1000" onkeydown="if(event.key==='Enter')addProject()">
+        </div>
+        <select class="proj-select" id="projLead">
+          <option value="gabriel">🟣 Gabriel</option>
+          <option value="matheus">🟢 Matheus</option>
+          <option value="renio">🔵 Renio</option>
+          <option value="rodrigo">🟡 Rodrigo</option>
+          <option value="aquiles">🩵 Aquiles</option>
+          <option value="lucas">⚪ Lucas</option>
+          <option value="outros">🔗 Outros / Externo</option>
+        </select>
+        <button class="proj-add-btn" onclick="addProject()">+ Adicionar</button>
+      </div>
+
+      <!-- Project list -->
+      <div class="proj-list" id="projList">
+        <div class="proj-list-empty">
+          <div style="font-size:28px;margin-bottom:8px">☀️</div>
+          Nenhum projeto adicionado ainda.<br>
+          <span style="font-size:11px">Use o formulário acima para incluir projetos do mês.</span>
+        </div>
+      </div>
+
+      <!-- Footer summary -->
+      <div class="proj-footer" id="projFooter" style="display:none">
+        <div class="proj-foot-kv">
+          <span class="proj-foot-label">Projetos</span>
+          <span class="proj-foot-val" id="footCount">—</span>
+        </div>
+        <div class="proj-foot-divider"></div>
+        <div class="proj-foot-kv">
+          <span class="proj-foot-label">Faturamento Total</span>
+          <span class="proj-foot-val" id="footTotal">—</span>
+        </div>
+        <div class="proj-foot-divider"></div>
+        <div class="proj-foot-kv">
+          <span class="proj-foot-label">Pool de Funcionários</span>
+          <span class="proj-foot-val" id="footPool">—</span>
+        </div>
+        <div class="proj-foot-divider"></div>
+        <div class="proj-foot-kv">
+          <span class="proj-foot-label">Pool Bônus Indicação</span>
+          <span class="proj-foot-val" id="footBonusPool">—</span>
+        </div>
+        <div class="proj-foot-divider"></div>
+        <div class="proj-foot-kv">
+          <span class="proj-foot-label">Lucros / sócio</span>
+          <span class="proj-foot-val" id="footPL" style="color:#059669">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Result strip (fat mode totals) -->
+    <div class="fat-result-strip" id="fatResultStrip" style="display:none">
+      <div class="fat-result-kv">
+        <div class="fat-result-label">Faturamento</div>
+        <div class="fat-result-val col-w" id="fatStripR">—</div>
+      </div>
+      <div class="fat-result-divider"></div>
+      <div class="fat-result-kv">
+        <div class="fat-result-label">Pool funcionários</div>
+        <div class="fat-result-val col-y" id="fatStripPool">—</div>
+      </div>
+      <div class="fat-result-divider"></div>
+      <div class="fat-result-kv">
+        <div class="fat-result-label">Matheus total</div>
+        <div class="fat-result-val col-m" id="fatStripM">—</div>
+      </div>
+      <div class="fat-result-divider"></div>
+      <div class="fat-result-kv">
+        <div class="fat-result-label">Gabriel (varia p/ regime)</div>
+        <div class="fat-result-val col-g" id="fatStripG">—</div>
+      </div>
+      <div class="fat-result-divider"></div>
+      <div class="fat-result-kv">
+        <div class="fat-result-label">Lucros / sócio</div>
+        <div class="fat-result-val col-m" id="fatStripPL">—</div>
+      </div>
+    </div>
+
+  </div><!-- /fatSection -->
+
+  <!-- ── PARTICIPAÇÃO DE LUCROS ── -->
+  <div class="pl-strip" id="plStrip">
+    <span class="pl-strip-title">💰 Participação de Lucros</span>
+    <div class="pl-kv">
+      <div class="pl-kv-label">Total ao pool de lucros</div>
+      <div class="pl-kv-val" id="plTotalPool">—</div>
+      <div class="pl-kv-sub" id="plTotalSub">3% do faturamento</div>
+    </div>
+    <div class="pl-kv">
+      <div class="pl-kv-label">Por sócio (igual p/ todos)</div>
+      <div class="pl-kv-val" id="plPerSocio">—</div>
+      <div class="pl-kv-sub" id="plPerSocioSub">0,5% cada</div>
+    </div>
+    <div class="pl-kv">
+      <div class="pl-kv-label">Tributação</div>
+      <div class="pl-kv-val">0%</div>
+      <div class="pl-kv-sub">Isento IRPF e INSS</div>
+    </div>
+    <div class="pl-note" id="plNote">Os dividendos são distribuídos igualmente entre os 6 sócios (incluindo Lucas). Como dividendo, são <strong>isentos de INSS e IRPF</strong> — complemento eficiente para qualquer regime de remuneração.</div>
+  </div>
+
+  <!-- ── COMPARATIVO POR CENÁRIO ── -->
+  <div class="sec-title" id="scenarioTitle">Comparativo por cenário de Gabriel</div>
+  <div class="sec-sub" id="scenarioSub">Cada cenário determina o faturamento necessário para Gabriel atingir sua meta · Matheus sempre em pro-labore</div>
+  <div id="scenarioCards"></div>
+
+  <!-- ── BÔNUS POR INDICAÇÃO (fat mode only) ── -->
+  <div id="bonusPanelSection" style="display:none">
+    <div class="bonus-panel">
+      <div class="bonus-panel-title">🏆 Bônus por Indicação do Mês</div>
+      <div class="bonus-panel-sub" id="bonusPanelSub"></div>
+      <div class="bonus-cards-grid" id="bonusCards"></div>
+    </div>
+  </div>
+
+  <!-- ── RESUMO ── -->
+  <div class="sec-title" style="margin-top:4px">Resumo — total mensal por cenário</div>
+  <div class="sec-sub" style="margin-bottom:10px" id="summarySubTitle">Inclui remuneração + participação de lucros</div>
+  <div class="summary-grid" id="summaryGrid"></div>
+
+  <!-- ── DISTRIBUIÇÃO DO POOL ── -->
+  <div class="distrib-card">
+    <div class="distrib-title">Distribuição do pool de funcionários por cenário</div>
+    <div id="distribBars"></div>
+    <div class="dbar-legend">
+      <div class="dleg"><div class="dleg-dot" style="background:#1D9E75"></div>Matheus — projeto</div>
+      <div class="dleg"><div class="dleg-dot" style="background:#c47a1a"></div>Matheus — CEO+CTO+CFO</div>
+      <div class="dleg"><div class="dleg-dot" style="background:#7F77DD"></div>Gabriel — projeto</div>
+    </div>
+  </div>
+
+  <!-- ── EXPLICAÇÃO ── -->
+  <div class="exp-card">
+    <div class="exp-title">Como funciona o cálculo</div>
+    <div class="exp-body">
+      Cada cenário de Gabriel determina o <strong>faturamento necessário</strong> para que ele atinja sua meta. A partir desse faturamento:<br><br>
+      <strong>Pool de funcionários</strong> (<span id="expPool">6%</span> do fat.) é dividido em:<br>
+      &nbsp;&nbsp;• Pool executivo (<span id="expExec">30%</span> do pool) → Matheus: prêmio CEO + CTO + CFO<br>
+      &nbsp;&nbsp;• Pool de projeto (<span id="expProj">70%</span> do pool) → Gabriel (85,5%) + Matheus (14,5%)<br><br>
+      <strong>Bônus por indicação</strong> (<span id="expBonus">5%</span> do fat. do projeto) → pago ao sócio que trouxe o lead. No modo real, cada projeto tem seu próprio indicador.<br>
+      <strong>Remuneração de Matheus (pro-labore)</strong> = (pool de projeto × 14,5% + pool executivo) ÷ 1,11 → pro-labore bruto<br><br>
+      <strong>Participação de lucros</strong> (<span id="expLucro">3%</span> do fat.) é dividida igualmente entre os <span id="expSocios">6</span> sócios = <strong id="expPerSocio">0,5%</strong> cada. Como dividendo, é <strong>isenta de INSS e IRPF</strong>.<br><br>
+      No modo <strong>Faturamento Real</strong>, cada projeto é cadastrado individualmente com seu valor e quem trouxe o lead — o bônus é calculado por projeto, não sobre o total do faturamento.
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ─────────────────────────────────────────────
+// PARTNER CONFIG
+// ─────────────────────────────────────────────
+const PARTNERS = {
+  gabriel: { label:'Gabriel', emoji:'🟣', badgeCls:'lc-gabriel', color:'#5b21b6' },
+  matheus: { label:'Matheus', emoji:'🟢', badgeCls:'lc-matheus', color:'#065f46' },
+  renio:   { label:'Renio',   emoji:'🔵', badgeCls:'lc-renio',   color:'#1e40af' },
+  rodrigo: { label:'Rodrigo', emoji:'🟡', badgeCls:'lc-rodrigo', color:'#92400e' },
+  aquiles: { label:'Aquiles', emoji:'🩵', badgeCls:'lc-aquiles', color:'#075985' },
+  lucas:   { label:'Lucas',   emoji:'⚪', badgeCls:'lc-lucas',   color:'#374151' },
+  outros:  { label:'Externos',emoji:'🔗', badgeCls:'lc-outros',  color:'#86198f' },
+};
+
+// ─────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────
+let currentMode = 'meta';
+let matheusRegime = 'prolabore'; // 'prolabore' | 'pjiii'
+let projects = [];
+let projId = 0;
+// Regime for bonus receipt per partner (excluding gabriel & outros)
+let partnerRegimes = {
+  matheus: 'prolabore',
+  renio:   'prolabore',
+  rodrigo: 'prolabore',
+  aquiles: 'prolabore',
+  lucas:   'prolabore',
+};
+
+// ─────────────────────────────────────────────
+// BONUS REGIME HELPERS
+// ─────────────────────────────────────────────
+// MEI is Gabriel-only (scenario cards). Other partners: Pro-labore or PJ AN.III only.
+const REGIMES_BONUS = [
+  { key:'prolabore', label:'Pro-labore' },
+  { key:'pjiii',    label:'PJ AN.III'  },
+];
+
+function setMatheusRegime(regime) {
+  matheusRegime = regime;
+  document.getElementById('mregPL').classList.toggle('mreg-active',    regime === 'prolabore');
+  document.getElementById('mregPJIII').classList.toggle('mreg-active', regime === 'pjiii');
+  calc();
+}
+
+function calcBonusNet(bonusCompanyCost, regime) {
+  if (regime === 'prolabore') {
+    // bonus = total custo empresa (encargo patronal incluso)
+    const gross  = bonusCompanyCost / 1.11;
+    const encCo  = bonusCompanyCost - gross;
+    const inssP  = gross * 0.11;
+    const net    = gross - inssP;
+    return { regime:'prolabore', gross, encCo, inssP, net,
+             encLabel:'Encargos patronais (11%)', impLabel:'INSS pessoal (11%)' };
+  } else if (regime === 'pjmei') {
+    const tax = bonusCompanyCost * 0.015;
+    return { regime:'pjmei', gross:bonusCompanyCost, encCo:0, inssP:tax, net:bonusCompanyCost-tax,
+             encLabel:'', impLabel:'DAS MEI (1,5%)' };
+  } else { // pjiii
+    const tax = bonusCompanyCost * 0.06;
+    return { regime:'pjiii', gross:bonusCompanyCost, encCo:0, inssP:tax, net:bonusCompanyCost-tax,
+             encLabel:'', impLabel:'Simples AN.III (~6%)' };
+  }
+}
+
+function setPartnerRegime(key, regime) {
+  if (partnerRegimes[key] !== undefined) {
+    partnerRegimes[key] = regime;
+    renderBonusPanel(); // re-render only bonus panel
+  }
+}
+
+// ─────────────────────────────────────────────
+// MODE
+// ─────────────────────────────────────────────
+function setMode(mode) {
+  currentMode = mode;
+  document.getElementById('btnMeta').classList.toggle('active', mode === 'meta');
+  document.getElementById('btnFat').classList.toggle('active', mode === 'fat');
+  document.getElementById('rowMeta').style.display = mode === 'meta' ? '' : 'none';
+  document.getElementById('rowMatheusRegime').style.display = mode === 'fat' ? '' : 'none';
+  document.getElementById('fatSection').style.display = mode === 'fat' ? '' : 'none';
+  document.getElementById('bonusPanelSection').style.display = mode === 'fat' ? '' : 'none';
+
+  if (mode === 'fat') {
+    const mLabel = matheusRegime === 'prolabore' ? 'Pro-labore' : 'PJ AN.III';
+    document.getElementById('scenarioTitle').textContent = 'Cenários de regime para Gabriel — faturamento real';
+    document.getElementById('scenarioSub').textContent = `Mesmo faturamento, diferentes regimes para Gabriel · Matheus em ${mLabel}`;
+    document.getElementById('summarySubTitle').textContent = 'Remuneração líquida + bônus de indicação (Gabriel) + participação de lucros';
+  } else {
+    document.getElementById('scenarioTitle').textContent = 'Comparativo por cenário de Gabriel';
+    document.getElementById('scenarioSub').textContent = 'Cada cenário determina o faturamento necessário para Gabriel atingir sua meta · Matheus sempre em pro-labore';
+    document.getElementById('summarySubTitle').textContent = 'Inclui remuneração + participação de lucros';
+  }
+  calc();
+}
+
+// ─────────────────────────────────────────────
+// PROJECT MANAGER
+// ─────────────────────────────────────────────
+function addProject() {
+  const name = document.getElementById('projName').value.trim();
+  const val  = parseFloat(document.getElementById('projVal').value);
+  const lead = document.getElementById('projLead').value;
+  if (!name || !val || val <= 0) {
+    document.getElementById('projName').focus();
+    return;
+  }
+  projects.push({ id: ++projId, name, val, lead });
+  document.getElementById('projName').value = '';
+  document.getElementById('projVal').value  = '';
+  document.getElementById('projName').focus();
+  renderProjects();
+  calc();
+}
+
+function removeProject(id) {
+  projects = projects.filter(p => p.id !== id);
+  renderProjects();
+  calc();
+}
+
+function renderProjects() {
+  const list = document.getElementById('projList');
+  const footer = document.getElementById('projFooter');
+  const pill = document.getElementById('projTotalPill');
+
+  if (projects.length === 0) {
+    list.innerHTML = `<div class="proj-list-empty">
+      <div style="font-size:28px;margin-bottom:8px">☀️</div>
+      Nenhum projeto adicionado ainda.<br>
+      <span style="font-size:11px">Use o formulário acima para incluir projetos do mês.</span>
+    </div>`;
+    footer.style.display = 'none';
+    document.getElementById('projCount').textContent = '0 projetos';
+    document.getElementById('projTotalVal').textContent = 'R$ 0';
+    return;
+  }
+
+  const total = projects.reduce((s, p) => s + p.val, 0);
+  document.getElementById('projCount').textContent = projects.length + (projects.length === 1 ? ' projeto' : ' projetos');
+  document.getElementById('projTotalVal').textContent = fmt(total);
+
+  list.innerHTML = projects.map(p => {
+    const pt = PARTNERS[p.lead];
+    return `<div class="proj-row">
+      <span class="proj-row-name" title="${p.name}">${p.name}</span>
+      <span class="proj-row-val">${fmt(p.val)}</span>
+      <span class="proj-lead-badge ${pt.badgeCls}">${pt.emoji} ${pt.label}</span>
+      <button class="proj-remove-btn" onclick="removeProject(${p.id})" title="Remover">×</button>
+    </div>`;
+  }).join('');
+
+  footer.style.display = 'flex';
+}
+
+// ─────────────────────────────────────────────
+// CALC ENGINE
+// ─────────────────────────────────────────────
+function fmt(v){ return 'R$ '+Math.round(v).toLocaleString('pt-BR') }
+
+const gabRegimes = [
+  {key:'g-pl',  name:'Pro-labore',         badgeText:'Pro-labore',
+   badgeBg:'#ede9fe', badgeColor:'#5b21b6', rate:0.11, inssEmp:0.11, useLiq:false, isPJ:false},
+  {key:'g-pjm', name:'PJ · MEI',            badgeText:'PJ MEI',
+   badgeBg:'#fef3c7', badgeColor:'#92400e', rate:0.015,inssEmp:0.0,  useLiq:true,  isPJ:true},
+  {key:'g-pj3', name:'PJ · Simples AN. III',badgeText:'PJ AN.III',
+   badgeBg:'#dbeafe', badgeColor:'#1e40af', rate:0.06, inssEmp:0.0,  useLiq:true,  isPJ:true},
+];
+
+const gabShare = 0.855, mShare = 0.145, mRate = 0.11, mInssEmp = 0.11;
+
+function calcGabR(gReg, target, poolPct, bonusPct, execPct) {
+  const projPoolCoef = (1 - execPct) * poolPct;
+  if (gReg.isPJ) {
+    return target / (gabShare * projPoolCoef * (1 - gReg.rate) + bonusPct);
+  } else {
+    const grossCoef = gabShare * projPoolCoef / (1 + gReg.rate);
+    return target / ((gReg.useLiq ? grossCoef*(1-gReg.inssEmp) : grossCoef) + bonusPct);
+  }
+}
+
+function calcGabEarnings(R, gReg, poolPct, bonusPct, execPct, overrideBonus) {
+  const projPool = (1 - execPct) * poolPct * R;
+  const gCompany = gabShare * projPool;
+  const bonus    = (overrideBonus !== undefined) ? overrideBonus : bonusPct * R;
+  let gross, encCo, net;
+  if (gReg.isPJ) {
+    gross = gCompany * (1 - gReg.rate); encCo = gCompany * gReg.rate; net = gross;
+  } else {
+    gross = gCompany / (1 + gReg.rate); encCo = gCompany - gross;
+    net   = gReg.useLiq ? gross*(1-gReg.inssEmp) : gross;
+  }
+  return {gCompany, gross, encCo, net, bonus, projPool};
+}
+
+function calcMatheusEarnings(R, poolPct, execPct, ceoPct, ctoPct, cfoPct, regime) {
+  regime = regime || 'prolabore';
+  const totalPool  = poolPct * R;
+  const projPool   = (1 - execPct) * totalPool;
+  const ceoPool    = ceoPct * totalPool, ctoPool = ctoPct * totalPool, cfoPool = cfoPct * totalPool;
+  const execPool   = ceoPool + ctoPool + cfoPool;
+  const mProjCost  = mShare * projPool;
+  const mTotalCost = mProjCost + execPool;  // company budget for Matheus
+
+  let mGross, mEncCo, mInssP, mNet;
+  if (regime === 'pjiii') {
+    // Company pays mTotalCost to PJ; PJ pays ~6% Simples; no patronal split
+    mGross  = mTotalCost;
+    mEncCo  = 0;
+    mInssP  = mTotalCost * 0.06;
+    mNet    = mTotalCost - mInssP;
+  } else {
+    // Pro-labore: patronal 11% included in mTotalCost
+    mGross  = mTotalCost / (1 + mRate);
+    mEncCo  = mTotalCost - mGross;
+    mInssP  = mGross * mInssEmp;
+    mNet    = mGross - mInssP;
+  }
+  return {regime,mTotalCost,mProjCost,execPool,ceoPool,ctoPool,cfoPool,mGross,mEncCo,mInssP,mNet,projPool,totalPool};
+}
+
+// ─────────────────────────────────────────────
+// MAIN CALC
+// ─────────────────────────────────────────────
+function calc() {
+  const target   = parseInt(document.getElementById('sTarget').value);
+  const poolPct  = parseFloat(document.getElementById('sPool').value)/100;
+  const bonusPct = parseFloat(document.getElementById('sBonus').value)/100;
+  const ceoPct   = parseInt(document.getElementById('sCeo').value)/100;
+  const ctoPct   = parseInt(document.getElementById('sCto').value)/100;
+  const cfoPct   = parseInt(document.getElementById('sCfo').value)/100;
+  const execPct  = ceoPct + ctoPct + cfoPct;
+  const projPct  = 1 - execPct;
+  const lucroPct = parseFloat(document.getElementById('sLucro').value)/100;
+  const nSocios  = parseInt(document.getElementById('sSocios').value);
+  const perSocioPct = lucroPct / nSocios;
+
+  // UI labels
+  document.getElementById('vTarget').textContent = fmt(target);
+  document.getElementById('vPool').textContent   = parseFloat(document.getElementById('sPool').value)+'%';
+  document.getElementById('vBonus').textContent  = parseFloat(document.getElementById('sBonus').value)+'%';
+  document.getElementById('vCeo').textContent    = parseInt(document.getElementById('sCeo').value)+'%';
+  document.getElementById('vCto').textContent    = parseInt(document.getElementById('sCto').value)+'%';
+  document.getElementById('vCfo').textContent    = parseInt(document.getElementById('sCfo').value)+'%';
+  document.getElementById('vLucro').textContent  = parseFloat(document.getElementById('sLucro').value)+'%';
+  document.getElementById('vSocios').textContent = nSocios+' sócios';
+  document.getElementById('expPool').textContent    = parseFloat(document.getElementById('sPool').value)+'%';
+  document.getElementById('expExec').textContent    = Math.round(execPct*100)+'%';
+  document.getElementById('expProj').textContent    = Math.max(0,Math.round(projPct*100))+'%';
+  document.getElementById('expBonus').textContent   = parseFloat(document.getElementById('sBonus').value)+'%';
+  document.getElementById('expLucro').textContent   = parseFloat(document.getElementById('sLucro').value)+'%';
+  document.getElementById('expSocios').textContent  = nSocios;
+  document.getElementById('expPerSocio').textContent= (perSocioPct*100).toFixed(2).replace('.',',')+'%';
+  document.getElementById('paramsSummary').innerHTML =
+    `Pool executivo: <strong>${Math.round(execPct*100)}%</strong> (CEO ${Math.round(ceoPct*100)}% + CTO ${Math.round(ctoPct*100)}% + CFO ${Math.round(cfoPct*100)}%) · Pool de projeto: <strong>${Math.max(0,Math.round(projPct*100))}%</strong> · Part. lucros: <strong>${(perSocioPct*100).toFixed(2).replace('.',',')}%</strong> por sócio`;
+
+  const isFatMode = currentMode === 'fat';
+
+  if (isFatMode) {
+    const mLabel = matheusRegime === 'prolabore' ? 'Pro-labore' : 'PJ AN.III';
+    document.getElementById('scenarioSub').textContent = `Mesmo faturamento, diferentes regimes para Gabriel · Matheus em ${mLabel}`;
+  }
+
+  // ── FAT MODE: compute from projects ──
+  let fatR = 0, bonusByPartner = {}, gabrielBonus = 0;
+  if (isFatMode) {
+    fatR = projects.reduce((s,p) => s + p.val, 0);
+    // Bonus per project goes to lead owner
+    projects.forEach(p => {
+      const b = bonusPct * p.val;
+      bonusByPartner[p.lead] = (bonusByPartner[p.lead] || 0) + b;
+    });
+    gabrielBonus = bonusByPartner['gabriel'] || 0;
+
+    // Update project footer
+    if (projects.length > 0) {
+      const totalBonusPool = Object.values(bonusByPartner).reduce((s,v)=>s+v,0);
+      document.getElementById('footCount').textContent = projects.length+(projects.length===1?' projeto':' projetos');
+      document.getElementById('footTotal').textContent = fmt(fatR);
+      document.getElementById('footPool').textContent  = fmt(poolPct * fatR);
+      document.getElementById('footBonusPool').textContent = fmt(totalBonusPool);
+      document.getElementById('footPL').textContent    = fmt(perSocioPct * fatR);
+    }
+  }
+
+  // Matheus lead bonus (fat mode only)
+  const matheusLeadBonus = isFatMode ? (bonusByPartner['matheus'] || 0) : 0;
+  const mBonusCalc = matheusLeadBonus > 0 ? calcBonusNet(matheusLeadBonus, matheusRegime) : null;
+
+  // ── BUILD SCENARIOS ──
+  let cardsHtml='', summaryHtml='', barsHtml='';
+  let bestTotal = -Infinity;
+  const scenarios = [];
+
+  gabRegimes.forEach(gReg => {
+    const R    = isFatMode ? fatR : calcGabR(gReg, target, poolPct, bonusPct, execPct);
+    const gE   = calcGabEarnings(R, gReg, poolPct, bonusPct, execPct, isFatMode ? gabrielBonus : undefined);
+    const mReg = isFatMode ? matheusRegime : 'prolabore';
+    const mE   = calcMatheusEarnings(R, poolPct, execPct, ceoPct, ctoPct, cfoPct, mReg);
+    const plVal = perSocioPct * R;
+    const gNetVal = gReg.isPJ ? gE.gross : gE.net;
+    const gTotal  = gNetVal + gE.bonus + plVal;
+    const mBonusNet = mBonusCalc ? mBonusCalc.net : 0;
+    const mTotal  = mE.mNet + mBonusNet + plVal;
+    scenarios.push({gReg, R, gE, mE, plVal, gTotal, mTotal, gNetVal, mBonusNet});
+    if (isFatMode ? gTotal > bestTotal : mTotal > bestTotal) bestTotal = isFatMode ? gTotal : mTotal;
+  });
+
+  // ── FAT MODE EMPTY STATE ──
+  if (isFatMode && fatR === 0) {
+    document.getElementById('fatResultStrip').style.display = 'none';
+    document.getElementById('bonusPanelSection').style.display = 'none';
+    document.getElementById('scenarioCards').innerHTML = `<div class="fat-empty">
+      <div class="fat-empty-icon">📋</div>
+      <div class="fat-empty-text">Adicione projetos para ver os cálculos</div>
+      <div class="fat-empty-sub">Cada projeto gera seu faturamento, bônus e participação de lucros</div>
+    </div>`;
+    document.getElementById('summaryGrid').innerHTML = '';
+    document.getElementById('distribBars').innerHTML = '';
+    document.getElementById('plTotalPool').textContent = '—';
+    document.getElementById('plPerSocio').textContent  = '—';
+    return;
+  }
+
+  // ── SCENARIO CARDS ──
+  scenarios.forEach(({gReg, R, gE, mE, plVal, gTotal, mTotal, gNetVal, mBonusNet}) => {
+    const isBest    = isFatMode ? Math.abs(gTotal - bestTotal) < 0.5 : Math.abs(mTotal - bestTotal) < 0.5;
+    const gLabel    = gReg.isPJ ? 'Líquido após impostos PJ' : 'Pro-labore bruto';
+    const gEncLabel = gReg.isPJ ? `Imposto no CNPJ (${(gReg.rate*100).toFixed(1)}%)` : 'Encargos patronais empresa';
+    const plRefSub  = (perSocioPct*100).toFixed(2).replace('.',',')+'% do fat.';
+    const fatLabel  = isFatMode ? 'faturamento informado' : 'faturamento/mês necessário';
+    const bestTag   = isFatMode ? '★ MELHOR REGIME GABRIEL' : '★ MAIOR TOTAL MATHEUS';
+    const bonusLabel = isFatMode
+      ? `Bônus leads Gabriel (${parseFloat(document.getElementById('sBonus').value)}%)`
+      : `Bônus de leads (${parseFloat(document.getElementById('sBonus').value)}%)`;
+
+    cardsHtml += `
+    <div class="scenario-card${isBest?' best':''}">
+      ${isBest?`<div class="best-tag">${bestTag}</div>`:''}
+      <div class="sc-header">
+        <span class="sc-badge" style="background:${gReg.badgeBg};color:${gReg.badgeColor}">${gReg.badgeText}</span>
+        <div>
+          <div class="sc-fat">Cenário: <strong>Gabriel · ${gReg.name}</strong></div>
+          <div class="sc-fat" style="margin-top:2px">Pool total: <strong>${fmt(mE.totalPool)}</strong> · Proj.: <strong>${fmt(gE.projPool + mE.mProjCost)}</strong> · Exec.: <strong>${fmt(mE.execPool)}</strong></div>
+        </div>
+        <div>
+          <div class="sc-fat-num">${fmt(Math.round(R))}</div>
+          <div class="sc-fat-label">${fatLabel}</div>
+        </div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-col col-g">
+          <div class="sc-col-title">🟣 Gabriel · ${gReg.name}</div>
+          <div class="brow"><span class="brow-label">Pool de projeto (85,5%)</span><span class="brow-val">${fmt(gE.gCompany)}</span></div>
+          <div class="brow"><span class="brow-label">${gEncLabel}</span><span class="brow-val">${fmt(gE.encCo)}</span></div>
+          <div class="brow"><span class="brow-label">${gLabel}</span><span class="brow-val accent-g">${fmt(gNetVal)}</span></div>
+          <div class="brow"><span class="brow-label">${bonusLabel}</span><span class="brow-val accent-bonus">${fmt(gE.bonus)}</span></div>
+          <div class="brow"><span class="brow-label">💰 Part. lucros (${plRefSub})</span><span class="brow-val accent-pl">${fmt(plVal)}</span></div>
+          <div class="total-box total-box-g">
+            <div>
+              <div class="total-box-label total-box-label-g">Total Gabriel</div>
+              <div class="total-box-sub total-box-sub-g">${gLabel.toLowerCase()} + bônus + lucros</div>
+            </div>
+            <div class="total-box-val total-box-val-g">${fmt(gTotal)}</div>
+          </div>
+        </div>
+        <div class="sc-col col-m">
+          <div class="sc-col-title">🟢 Matheus · ${isFatMode && matheusRegime==='pjiii' ? 'PJ AN.III' : 'Pro-labore'}</div>
+          <div class="brow"><span class="brow-label">Pool de projeto (14,5%)</span><span class="brow-val">${fmt(mE.mProjCost)}</span></div>
+          <div class="brow"><span class="brow-label" style="color:#c47a1a">👤 Prêmio CEO</span><span class="brow-val accent-exec">${fmt(mE.ceoPool)}</span></div>
+          <div class="brow"><span class="brow-label" style="color:#2563eb">💻 Prêmio CTO</span><span class="brow-val" style="color:#2563eb">${fmt(mE.ctoPool)}</span></div>
+          <div class="brow"><span class="brow-label" style="color:#059669">💰 Prêmio CFO</span><span class="brow-val" style="color:#059669">${fmt(mE.cfoPool)}</span></div>
+          <div class="brow" style="border-top:1px dashed #e5e3db;margin-top:2px;padding-top:5px"><span class="brow-label">Total executivo</span><span class="brow-val accent-exec">${fmt(mE.execPool)}</span></div>
+          <div class="brow"><span class="brow-label">Custo total empresa</span><span class="brow-val">${fmt(mE.mTotalCost)}</span></div>
+          ${mE.regime==='pjiii'
+            ? `<div class="brow"><span class="brow-label">Simples AN.III (~6%)</span><span class="brow-val">${fmt(mE.mInssP)}</span></div>
+               <div class="brow"><span class="brow-label">Líquido PJ</span><span class="brow-val accent-m">${fmt(mE.mNet)}</span></div>`
+            : `<div class="brow"><span class="brow-label">Encargos patronais (11%)</span><span class="brow-val">${fmt(mE.mEncCo)}</span></div>
+               <div class="brow"><span class="brow-label">Pro-labore bruto</span><span class="brow-val">${fmt(mE.mGross)}</span></div>
+               <div class="brow"><span class="brow-label">INSS pessoal sócio (11%)</span><span class="brow-val">${fmt(mE.mInssP)}</span></div>
+               <div class="brow"><span class="brow-label">Pro-labore líquido</span><span class="brow-val accent-m">${fmt(mE.mNet)}</span></div>`
+          }
+          <div class="brow"><span class="brow-label">💰 Part. lucros (${plRefSub})</span><span class="brow-val accent-pl">${fmt(plVal)}</span></div>
+          ${isFatMode && mBonusNet > 0 ? `
+          <div class="brow" style="border-top:1px dashed #f59e0b22;margin-top:2px;padding-top:4px">
+            <span class="brow-label">🏆 Bônus leads Matheus (líq. ${matheusRegime==='pjiii'?'PJ':'PL'})</span>
+            <span class="brow-val accent-bonus">${fmt(mBonusNet)}</span>
+          </div>` : ''}
+          <div class="total-box total-box-m">
+            <div>
+              <div class="total-box-label total-box-label-m">Total Matheus</div>
+              <div class="total-box-sub total-box-sub-m">${mE.regime==='pjiii'?'líquido PJ':'pro-labore líquido'}${mBonusNet>0?' + bônus':''} + lucros</div>
+            </div>
+            <div class="total-box-val total-box-val-m">${fmt(mTotal)}</div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+    // Summary card
+    summaryHtml += `
+    <div class="sum-card${isBest?' best-sum':''}">
+      <div class="sum-regime">${gReg.name}</div>
+      <div class="sum-total-m">${fmt(mTotal)}</div>
+      <div class="sum-label-small">total Matheus/mês</div>
+      <div class="sum-total-g" style="margin-top:4px">${fmt(gTotal)}</div>
+      <div class="sum-label-small">total Gabriel/mês</div>
+    </div>`;
+
+    // Dist bar
+    const mProjPct  = mE.mProjCost / mE.totalPool * 100;
+    const execPctB  = mE.execPool  / mE.totalPool * 100;
+    const gProjPct  = gE.gCompany  / mE.totalPool * 100;
+    barsHtml += `
+    <div class="dbar-row">
+      <span class="dbar-label">${gReg.name}</span>
+      <div class="dbar-track">
+        <div class="dseg" style="width:${mProjPct.toFixed(1)}%;background:#1D9E75"><span class="dseg-txt">${Math.round(mProjPct)}%M</span></div>
+        <div class="dseg" style="width:${execPctB.toFixed(1)}%;background:#c47a1a"><span class="dseg-txt">${Math.round(execPctB)}%E</span></div>
+        <div class="dseg" style="width:${gProjPct.toFixed(1)}%;background:#7F77DD"><span class="dseg-txt">${Math.round(gProjPct)}%G</span></div>
+      </div>
+      <span class="dbar-total">${fmt(mE.totalPool)}</span>
+    </div>`;
+  });
+
+  document.getElementById('scenarioCards').innerHTML = cardsHtml;
+  document.getElementById('summaryGrid').innerHTML   = summaryHtml;
+  document.getElementById('distribBars').innerHTML   = barsHtml;
+
+  // PL strip
+  const refR = scenarios[0].R;
+  const plRef = perSocioPct * refR, plTot = lucroPct * refR;
+  document.getElementById('plTotalPool').textContent   = fmt(plTot);
+  document.getElementById('plPerSocio').textContent    = fmt(plRef);
+  document.getElementById('plTotalSub').textContent    = parseFloat(document.getElementById('sLucro').value)+'% do faturamento';
+  document.getElementById('plPerSocioSub').textContent = (perSocioPct*100).toFixed(2).replace('.',',')+'% cada · '+nSocios+' sócios';
+  document.getElementById('plNote').innerHTML          = `Os dividendos são distribuídos igualmente entre os <strong>${nSocios}</strong> sócios (incluindo Lucas). Como dividendo, são <strong>isentos de INSS e IRPF</strong> — complemento eficiente para qualquer regime de remuneração.`;
+
+  // ── FAT MODE EXTRAS ──
+  if (isFatMode) {
+    document.getElementById('fatResultStrip').style.display = 'flex';
+    document.getElementById('fatStripR').textContent    = fmt(fatR);
+    document.getElementById('fatStripPool').textContent = fmt(poolPct * fatR);
+    document.getElementById('fatStripM').textContent    = fmt(scenarios[0].mTotal);
+    const gMin = Math.min(...scenarios.map(s=>s.gTotal));
+    const gMax = Math.max(...scenarios.map(s=>s.gTotal));
+    document.getElementById('fatStripG').textContent = gMin===gMax ? fmt(gMin) : `${fmt(gMin)}–${fmt(gMax)}`;
+    document.getElementById('fatStripPL').textContent = fmt(plRef);
+
+    // ── BONUS PANEL ──
+    renderBonusPanel();
+  }
+}
+
+// ─────────────────────────────────────────────
+// BONUS PANEL RENDER (standalone, called by calc + setPartnerRegime)
+// ─────────────────────────────────────────────
+function renderBonusPanel() {
+  const bonusPanelSection = document.getElementById('bonusPanelSection');
+  if (currentMode !== 'fat') { bonusPanelSection.style.display = 'none'; return; }
+
+  const bonusPct = parseFloat(document.getElementById('sBonus').value) / 100;
+
+  // Rebuild bonusByPartner from current projects
+  const bonusByPartner = {};
+  projects.forEach(p => {
+    const b = bonusPct * p.val;
+    bonusByPartner[p.lead] = (bonusByPartner[p.lead] || 0) + b;
+  });
+
+  const partnerKeys = Object.keys(bonusByPartner);
+  if (partnerKeys.length === 0) { bonusPanelSection.style.display = 'none'; return; }
+
+  bonusPanelSection.style.display = 'block';
+  const bonusPctVal = parseFloat(document.getElementById('sBonus').value);
+  document.getElementById('bonusPanelSub').textContent =
+    `${bonusPctVal}% aplicado sobre o valor de cada projeto para o sócio que trouxe o lead · ${partnerKeys.length} sócio${partnerKeys.length>1?'s':''} com bônus este mês`;
+
+  const sorted = [...partnerKeys].sort((a,b) => {
+    if (a==='outros' && b!=='outros') return 1;
+    if (b==='outros' && a!=='outros') return -1;
+    return bonusByPartner[b] - bonusByPartner[a];
+  });
+
+  let bonusHtml = '';
+  sorted.forEach(key => {
+    const pt     = PARTNERS[key];
+    const bonus  = bonusByPartner[key];
+    const myProj = projects.filter(p => p.lead === key);
+    const myFat  = myProj.reduce((s,p) => s+p.val, 0);
+    const isOut  = key === 'outros';
+    const isGab  = key === 'gabriel';
+    const hasRegime = !isOut && !isGab && partnerRegimes[key] !== undefined;
+    const reg    = hasRegime ? partnerRegimes[key] : null;
+    const bn     = hasRegime ? calcBonusNet(bonus, reg) : null;
+
+    // Regime toggle buttons
+    let regimeToggleHtml = '';
+    if (hasRegime) {
+      regimeToggleHtml = `<div class="breg-toggle">
+        ${REGIMES_BONUS.map(r => `
+          <button class="breg-btn${reg===r.key?' breg-active':''}"
+            onclick="setPartnerRegime('${key}','${r.key}')">${r.label}</button>`).join('')}
+      </div>`;
+    }
+
+    // Breakdown block
+    let breakdownHtml = '';
+    if (isOut) {
+      breakdownHtml = `
+        <div class="bonus-breakdown">
+          <div class="bbd-row"><span>Custo externo (bruto)</span><span>${fmt(bonus)}</span></div>
+        </div>
+        <div class="bonus-outros-note" style="margin-top:6px">⚠️ Indicação externa — verificar acordo comercial</div>`;
+    } else if (isGab) {
+      breakdownHtml = `
+        <div class="bonus-breakdown">
+          <div class="bbd-row"><span>Bônus bruto (seus leads)</span><span>${fmt(bonus)}</span></div>
+        </div>
+        <div class="bonus-gabriel-note">📊 Impacto líquido por regime mostrado nos cenários acima</div>`;
+    } else {
+      // Pro-labore specific or PJ
+      let rows = '';
+      if (reg === 'prolabore') {
+        rows = `
+          <div class="bbd-row"><span>Custo empresa (bruto+enc.)</span><span>${fmt(bonus)}</span></div>
+          <div class="bbd-row"><span>${bn.encLabel}</span><span>−${fmt(bn.encCo)}</span></div>
+          <div class="bbd-row"><span>Pro-labore bruto</span><span>${fmt(bn.gross)}</span></div>
+          <div class="bbd-row"><span>${bn.impLabel}</span><span>−${fmt(bn.inssP)}</span></div>
+          <div class="bbd-row bbd-net"><span>Líquido a receber</span><span>${fmt(bn.net)}</span></div>`;
+      } else {
+        rows = `
+          <div class="bbd-row"><span>Valor bruto recebido</span><span>${fmt(bn.gross)}</span></div>
+          <div class="bbd-row"><span>${bn.impLabel}</span><span>−${fmt(bn.inssP)}</span></div>
+          <div class="bbd-row bbd-net"><span>Líquido a receber</span><span>${fmt(bn.net)}</span></div>`;
+      }
+      breakdownHtml = `<div class="bonus-breakdown">${rows}</div>`;
+    }
+
+    bonusHtml += `
+    <div class="bonus-card ${pt.badgeCls}">
+      <div class="bonus-card-name">${pt.emoji} ${pt.label}</div>
+      <ul class="bonus-proj-list">
+        ${myProj.map(p=>`
+          <li>
+            <span class="bonus-proj-item-name" title="${p.name}">${p.name}</span>
+            <span class="bonus-proj-item-val">${fmt(p.val)}</span>
+          </li>`).join('')}
+      </ul>
+      <div class="bonus-fat-sub">${myProj.length} projeto${myProj.length>1?'s':''} · ${fmt(myFat)} indicados</div>
+      ${regimeToggleHtml}
+      ${breakdownHtml}
+    </div>`;
+  });
+
+  document.getElementById('bonusCards').innerHTML = bonusHtml;
+}
+
+calc();
+</script>
+</body>
+</html>
