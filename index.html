@@ -279,6 +279,52 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4f0;color:#1a
 .rec-body{font-size:12px;color:#555;line-height:1.75}
 .rec-body strong{color:#1a1a18}
 @media(max-width:600px){.pros-cons,.reinv-stats{grid-template-columns:1fr}}
+
+/* ── CONTRATO SUNNE TAB ── */
+.ct-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:14px}
+.ct-meta-item{background:#fff;border:1px solid #e5e3db;border-radius:8px;padding:9px 12px}
+.ct-meta-label{font-size:9.5px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
+.ct-meta-val{font-size:12px;color:#1a1a18;font-weight:500;line-height:1.4}
+.ct-card{background:#fff;border:1px solid #e5e3db;border-radius:12px;padding:14px 16px;margin-bottom:12px}
+.ct-card-head{display:flex;align-items:flex-start;gap:11px;margin-bottom:9px}
+.ct-num{width:26px;height:26px;border-radius:50%;background:#1D9E75;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.ct-card-title{font-size:13px;font-weight:600;color:#1a1a18}
+.ct-pct{display:inline-block;background:#E1F5EE;color:#065f46;border:1px solid #5DCAA5;font-size:11px;font-weight:700;padding:2px 9px;border-radius:7px;margin-left:auto;flex-shrink:0}
+.ct-card-body{font-size:12px;color:#555;line-height:1.7}
+.ct-card-body strong{color:#1a1a18}
+.ct-formula{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;background:#f9f9f7;border:1px solid #e5e3db;border-radius:7px;padding:8px 11px;margin:7px 0;color:#1a1a18;white-space:pre-wrap;line-height:1.5}
+.ct-table{width:100%;border-collapse:collapse;margin:8px 0;font-size:11.5px}
+.ct-table th{background:#f9f9f7;color:#888;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;text-align:left;padding:7px 10px;border-bottom:1px solid #e5e3db}
+.ct-table td{padding:7px 10px;border-bottom:1px solid #f0eee8;color:#555}
+.ct-table td strong{color:#059669;font-weight:700}
+.ct-table tr:last-child td{border-bottom:none}
+.ct-warn{background:#fef3c7;border:1px solid #fcd34d;border-radius:9px;padding:10px 13px;font-size:11.5px;color:#92400e;line-height:1.6;margin-bottom:12px}
+.ct-warn strong{color:#78350f}
+
+/* ── POLÍTICA DE LEADS TAB ── */
+.lp-principio{background:#E1F5EE;border-left:4px solid #1D9E75;border-radius:8px;padding:12px 15px;font-size:12px;color:#065f46;line-height:1.7;margin-bottom:12px}
+.lp-principio strong{color:#053d2c}
+.lp-critical{background:#FCEBEB;border:2px solid #A32D2D;border-radius:10px;padding:14px 16px;margin-bottom:14px;font-size:12px;color:#7f1d1d;line-height:1.65}
+.lp-critical strong{color:#5c1212}
+.lp-tag{display:inline-block;background:#A32D2D;color:#fff;font-size:9.5px;font-weight:700;padding:3px 10px;border-radius:999px;letter-spacing:.6px;margin-bottom:7px}
+.lp-temps{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;margin-bottom:14px}
+.lp-temp{background:#fff;border:1px solid #e5e3db;border-radius:10px;padding:14px;border-top:4px solid #3b82f6}
+.lp-temp.morno{border-top-color:#f59e0b}
+.lp-temp.quente{border-top-color:#dc2626}
+.lp-temp-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.lp-temp-title{font-weight:700;text-transform:uppercase;letter-spacing:.8px;font-size:11px;color:#3b82f6}
+.lp-temp.morno .lp-temp-title{color:#f59e0b}.lp-temp.quente .lp-temp-title{color:#dc2626}
+.lp-temp-pct{font-size:22px;font-weight:800;color:#3b82f6}
+.lp-temp.morno .lp-temp-pct{color:#f59e0b}.lp-temp.quente .lp-temp-pct{color:#dc2626}
+.lp-vlabel{font-size:10px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.6px;margin:10px 0 4px}
+.lp-temp ul{margin:0;padding-left:16px}
+.lp-temp li{font-size:11px;color:#444;margin-bottom:3px;line-height:1.45}
+.lp-temp li strong{color:#1a1a18}
+.lp-callout{background:#fef3c7;border-left:4px solid #f59e0b;border-radius:7px;padding:10px 13px;font-size:11.5px;color:#92400e;line-height:1.6;margin:10px 0}
+.lp-callout strong{color:#78350f}
+.lp-list{font-size:12px;color:#555;line-height:1.7;margin:8px 0 12px;padding-left:18px}
+.lp-list li{margin-bottom:5px}
+.lp-list li strong{color:#1a1a18}
 </style>
 </head>
 <body>
@@ -302,6 +348,10 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4f0;color:#1a
     <button class="mode-btn" id="btnFat" onclick="setMode('fat')">📋 Faturamento Real por Projeto</button>
     <div class="mode-sep"></div>
     <button class="mode-btn" id="btnReinv" onclick="setMode('reinvestimento')">♻️ Reinvestindo o Pro-labore</button>
+    <div class="mode-sep"></div>
+    <button class="mode-btn" id="btnContrato" onclick="setMode('contrato')">📄 Contrato Sunne</button>
+    <div class="mode-sep"></div>
+    <button class="mode-btn" id="btnLeads" onclick="setMode('leads')">🌡️ Política de Leads</button>
   </div>
 
   <!-- ── CALC CONTENT (hidden when reinvestimento tab is active) ── -->
@@ -683,6 +733,265 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4f0;color:#1a
     <div style="height:24px"></div>
   </div><!-- /reinvestContent -->
 
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- ── CONTRATO SUNNE TAB ── -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div id="contratoContent" style="display:none">
+
+    <div class="sec-title">Resumo do contrato Sunne — o que a YourWatt pode receber</div>
+    <div class="sec-sub" style="margin-bottom:14px">SUNNE SISTEMA DE WEB LTDA × YOURWATT SERVIÇOS LTDA — Instrumento Particular de Agente Autônomo e Outras Avenças</div>
+
+    <div class="ct-meta">
+      <div class="ct-meta-item"><div class="ct-meta-label">Assinatura</div><div class="ct-meta-val">04 a 11 de maio de 2026</div></div>
+      <div class="ct-meta-item"><div class="ct-meta-label">Vigência</div><div class="ct-meta-val">180 dias · renovação automática</div></div>
+      <div class="ct-meta-item"><div class="ct-meta-label">Rescisão unilateral</div><div class="ct-meta-val">30 dias de antecedência · sem multa</div></div>
+      <div class="ct-meta-item"><div class="ct-meta-label">Foro</div><div class="ct-meta-val">Comarca de Fortaleza/CE</div></div>
+    </div>
+
+    <div class="sec-title" style="margin-top:6px">Comissões por produto (Anexo II)</div>
+    <div class="sec-sub" style="margin-bottom:12px">Todos os valores são líquidos do lado da Sunne — a YourWatt arca com seus próprios tributos sobre o que recebe via NF</div>
+
+    <div class="ct-card">
+      <div class="ct-card-head">
+        <div class="ct-num">1</div>
+        <div class="ct-card-title">Energia por Assinatura — Gestão Sunne</div>
+        <div class="ct-pct">60%</div>
+      </div>
+      <div class="ct-card-body">
+        <strong>60%</strong> sobre o faturamento líquido da Sunne (usinas administradas pela Sunne), equivalente a <strong>uma fatura média</strong> da unidade consumidora.
+        <div class="ct-formula">{[VMMEC × Tarifa Injetada (R$/kWh) × (1 − Desconto Ofertado %)] − Alíquota de Impostos Sunne} × 60%</div>
+        VMMEC = soma do consumo dos últimos 12 meses ÷ 12. Pagamento <strong>suspenso</strong> se houver pendência documental ou troca de titularidade.
+      </div>
+    </div>
+
+    <div class="ct-card">
+      <div class="ct-card-head">
+        <div class="ct-num">2</div>
+        <div class="ct-card-title">Energia por Assinatura — Usina de Terceiro</div>
+        <div class="ct-pct">30%</div>
+      </div>
+      <div class="ct-card-body">
+        <strong>30%</strong> sobre o valor líquido (descontados tributos) pago pela usina parceira à Sunne.
+        <div class="ct-formula">(Valor pago pela Usina Parceira − Alíquota de Impostos Sunne) × 30%</div>
+        Pago no <strong>mês subsequente</strong> ao recebimento pela Sunne.
+      </div>
+    </div>
+
+    <div class="ct-card">
+      <div class="ct-card-head">
+        <div class="ct-num">3</div>
+        <div class="ct-card-title">Mercado Livre</div>
+        <div class="ct-pct">10%</div>
+      </div>
+      <div class="ct-card-body">
+        <strong>10%</strong> do valor líquido pago pela comercializadora vencedora à Sunne. Pago no <strong>mês subsequente</strong> ao recebimento.
+        <div class="ct-warn"><strong>Atenção:</strong> o texto do contrato diz 10%, mas a fórmula no PDF aparece com × 30% — validar com a Sunne qual é o percentual correto.</div>
+      </div>
+    </div>
+
+    <div class="ct-card">
+      <div class="ct-card-head">
+        <div class="ct-num">4</div>
+        <div class="ct-card-title">Gestão 360</div>
+        <div class="ct-pct">10%</div>
+      </div>
+      <div class="ct-card-body">
+        <strong>10%</strong> (Comissão Operacional) sobre a receita de <strong>setup</strong> obtida pela Sunne com clientes indicados pela Agente. Pago no <strong>dia 25 do mês seguinte</strong> ao recebimento. Não inclui receitas recorrentes/comerciais pagas pelo cliente (salvo se o próprio parceiro atuar como Agente).
+      </div>
+    </div>
+
+    <div class="ct-card">
+      <div class="ct-card-head">
+        <div class="ct-num">5</div>
+        <div class="ct-card-title">Aluguel de Equipamento Solar</div>
+        <div class="ct-pct">100%</div>
+      </div>
+      <div class="ct-card-body">
+        <strong>100%</strong> sobre o valor líquido (descontados impostos) da <strong>taxa de adesão</strong> do contrato de locação. Pagamento em <strong>parcela única</strong>, no mês subsequente ao recebimento.
+      </div>
+    </div>
+
+    <div class="sec-title" style="margin-top:6px">Programa de Parceria — Anexo III (Energia por Assinatura)</div>
+    <div class="sec-sub" style="margin-bottom:10px">Aplica-se a Gestão Sunne e Usina de Terceiro</div>
+    <div class="ct-card">
+      <div class="ct-card-body">
+        <strong>Faixa de remuneração única: 60%.</strong><br>
+        <strong>Recorrência</strong>: spread do desconto ofertado ao cliente, com base no percentual máximo de cada praça — <strong>Ceará 25%</strong>, <strong>demais estados 20%</strong>. O volume considera os kWh dos contratos assinados/validados nos 2 meses anteriores à apuração.<br><br>
+        Pagamento em <strong>2 parcelas</strong>: 1ª (60%) após assinatura e validação dos documentos; 2ª (saldo) após a efetiva injeção dos créditos e faturamento pela Sunne. No caso de Usina de Terceiro, ambas condicionadas ao pagamento da usina à Sunne.
+      </div>
+    </div>
+
+    <div class="sec-title" style="margin-top:6px">Simulação — Gestão Sunne</div>
+    <div class="sec-sub" style="margin-bottom:10px">Cliente no Ceará · conta média R$ 600 · desconto ofertado 20% (máximo da praça: 25%)</div>
+    <div class="ct-card">
+      <div class="ct-card-body">
+        <strong>Comissão única (60%):</strong> {[R$ 600 × (1 − 20%)] − Impostos Sunne} × 60% = {R$ 480 − Impostos Sunne} × 60%. A alíquota de impostos da Sunne não está fixada no contrato — cenários abaixo.
+        <table class="ct-table">
+          <thead><tr><th>Imposto Sunne</th><th>Faturamento líquido</th><th>Comissão única (60%)</th></tr></thead>
+          <tbody>
+            <tr><td>0%</td><td>R$ 480,00</td><td><strong>R$ 288,00</strong></td></tr>
+            <tr><td>~11,33% (Lucro Presumido)</td><td>R$ 425,62</td><td><strong>R$ 255,37</strong></td></tr>
+            <tr><td>~16,33% (com ISS 5%)</td><td>R$ 401,62</td><td><strong>R$ 240,97</strong></td></tr>
+            <tr><td>~25%</td><td>R$ 360,00</td><td><strong>R$ 216,00</strong></td></tr>
+          </tbody>
+        </table>
+        <strong>Recorrência:</strong> spread = 25% (máx CE) − 20% (ofertado) = 5% → R$ 600 × 5% = <strong>R$ 30/mês</strong> enquanto o cliente estiver ativo.
+        <table class="ct-table">
+          <thead><tr><th>Cenário (imposto Sunne)</th><th>Comissão única</th><th>Recorrência 12m</th><th>Total 1º ano</th></tr></thead>
+          <tbody>
+            <tr><td>Conservador (25%)</td><td>R$ 216,00</td><td>R$ 360,00</td><td><strong>R$ 576,00</strong></td></tr>
+            <tr><td>Neutro (~16%)</td><td>R$ 240,97</td><td>R$ 360,00</td><td><strong>R$ 600,97</strong></td></tr>
+            <tr><td>Otimista (0%)</td><td>R$ 288,00</td><td>R$ 360,00</td><td><strong>R$ 648,00</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="sec-title" style="margin-top:6px">Regras de apuração e pagamento (Cláusula 3)</div>
+    <div class="ct-card">
+      <div class="ct-card-body">
+        <strong>Apuração</strong>: a partir do dia 1º do mês subsequente. <strong>Pagamento</strong>: em até 6 dias úteis após a apuração, mediante NF (ex.: vendas de janeiro → apurado até 20/fev → pago em 25/fev). Quando o pagamento depende de faturamento de terceiros, só ocorre após a Sunne receber. Repasse via depósito ou Pix, com NF enviada 5 dias antes. Datas em fim de semana/feriado são prorrogadas para o próximo dia útil.
+      </div>
+    </div>
+
+    <div class="sec-title" style="margin-top:6px">Condições importantes</div>
+    <div class="ct-card">
+      <div class="ct-card-body">
+        <strong>Sem comissão</strong> se o cliente desistir antes do fechamento, ou fechar outro produto fora do Anexo I, ou pela mera indicação (só conta após contrato assinado e/ou pagamento efetivado).<br>
+        Se a Agente ficar <strong>180 dias sem indicações</strong>, o contrato é rescindido sem ônus.<br>
+        <strong>Rescisão unilateral</strong>: 30 dias de antecedência — se pedida pela Agente, a Sunne não é obrigada a antecipar valores em aberto.<br>
+        <strong>Rescisão por justa causa</strong>: multa de 3× o último faturamento de comissão, além de perdas e danos.<br>
+        <strong>Confidencialidade</strong>: 5 anos. Sem vínculo trabalhista ou societário entre as Partes.
+      </div>
+    </div>
+
+    <div style="height:24px"></div>
+  </div><!-- /contratoContent -->
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- ── POLÍTICA DE LEADS TAB ── -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div id="leadsContent" style="display:none">
+
+    <div class="sec-title">Classificação e remuneração de leads para sócios</div>
+    <div class="sec-sub" style="margin-bottom:14px">Verticais: L1 Instalação · L2 Usinas (Investimento) · Vigência 01/06/2026 · Revisão trimestral</div>
+
+    <div class="sec-title" style="margin-top:0">1. Princípio</div>
+    <div class="lp-principio">A comissão do sócio remunera o <strong>trabalho de qualificação</strong>, não apenas a indicação. Quanto mais "pronto para fechar" o lead chegar à equipe comercial, maior o bônus. Isso desincentiva despejo de contatos crus e incentiva pré-venda real.</div>
+    <div class="lp-critical">
+      <span class="lp-tag">REGRA INEGOCIÁVEL</span>
+      <div><strong>Sem conversa prévia, sem comissão.</strong> Nenhum percentual (1%, 3% ou 5%) é pago se o sócio não tiver tido uma conversa direta com o lead antes de registrá-lo no CRM. Conversa significa <strong>áudio, ligação ou reunião</strong> — troca apenas de texto, cartão de visita, encaminhamento por terceiros ou menção de nome não contam. A evidência (gravação, registro de chamada ou ata) é obrigatória no registro do lead.</div>
+    </div>
+
+    <div class="sec-title">2. Critérios objetivos por temperatura</div>
+    <div class="sec-sub" style="margin-bottom:10px">Cada lead precisa cumprir <strong>todos</strong> os requisitos da faixa. Critério faltante = cai uma temperatura.</div>
+    <div class="lp-temps">
+      <div class="lp-temp frio">
+        <div class="lp-temp-head"><span class="lp-temp-title">Lead Frio</span><span class="lp-temp-pct">1%</span></div>
+        <div class="lp-vlabel">L1 — Instalação</div>
+        <ul>
+          <li>Nome, telefone/WhatsApp e cidade confirmados</li>
+          <li>Interesse genérico ("quero saber sobre solar")</li>
+          <li>Sem conta de luz, sem urgência, sem perfil de consumo</li>
+        </ul>
+        <div class="lp-vlabel">L2 — Investimento</div>
+        <ul>
+          <li>Nome, contato e empresa/CPF confirmados</li>
+          <li>Curiosidade sobre investir em energia solar</li>
+          <li>Sem ticket-alvo, horizonte de capital ou perfil patrimonial</li>
+        </ul>
+      </div>
+      <div class="lp-temp morno">
+        <div class="lp-temp-head"><span class="lp-temp-title">Lead Morno</span><span class="lp-temp-pct">3%</span></div>
+        <div class="lp-vlabel">L1 — Instalação</div>
+        <ul>
+          <li>Tudo do frio +</li>
+          <li>Conta de luz enviada (≥ R$ 350/mês ou demanda no ICP)</li>
+          <li>Confirmou ser o <strong>decisor</strong></li>
+          <li>Conversou ao menos uma vez por áudio/chamada</li>
+          <li>Janela para decidir: <strong>até 90 dias</strong></li>
+        </ul>
+        <div class="lp-vlabel">L2 — Investimento</div>
+        <ul>
+          <li>Tudo do frio +</li>
+          <li>Ticket-alvo declarado <strong>≥ R$ 300 mil</strong></li>
+          <li>Confirmou liquidez ou origem do capital</li>
+          <li>Já avaliou alternativa concorrente (CDB, FII…)</li>
+          <li>Janela para alocar: <strong>até 120 dias</strong></li>
+        </ul>
+      </div>
+      <div class="lp-temp quente">
+        <div class="lp-temp-head"><span class="lp-temp-title">Lead Quente</span><span class="lp-temp-pct">5%</span></div>
+        <div class="lp-vlabel">L1 — Instalação</div>
+        <ul>
+          <li>Tudo do morno +</li>
+          <li>Proposta YourWatt já solicitada explicitamente</li>
+          <li>Sem objeção de preço aberta (ou já superada)</li>
+          <li>Reunião de fechamento agendada <strong>em 15 dias</strong></li>
+          <li>Documentação inicial enviada</li>
+        </ul>
+        <div class="lp-vlabel">L2 — Investimento</div>
+        <ul>
+          <li>Tudo do morno +</li>
+          <li>Carta de intenção assinada ou reunião presencial agendada</li>
+          <li>Due diligence iniciada</li>
+          <li>Compromisso verbal de fechamento <strong>em 30 dias</strong></li>
+          <li>Aprovação preliminar de minuta ou term sheet</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-title">3. Base de cálculo da comissão</div>
+    <div class="ct-card">
+      <div class="ct-card-body">
+        <table class="ct-table">
+          <thead><tr><th>Vertical</th><th>Base de cálculo</th><th>Observação</th></tr></thead>
+          <tbody>
+            <tr><td><strong>L1 — Instalação</strong></td><td>Valor líquido do contrato (preço menos impostos diretos e equipamento repassado)</td><td>Não incide sobre frete, ART ou taxa de homologação</td></tr>
+            <tr><td><strong>L2 — Investimento</strong></td><td>Valor captado e efetivamente integralizado</td><td>Pago em parcelas: 60% na integralização, 40% na operação</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="sec-title">4. Regras anti-abuso</div>
+    <ol class="lp-list">
+      <li><strong>Conversa prévia obrigatória.</strong> Comissão só com conversa direta (áudio, ligação ou reunião) com o próprio lead antes do registro. Indicação "às cegas", encaminhamento de terceiros, só texto ou menção de nome não geram comissão em nenhuma temperatura.</li>
+      <li><strong>Auto-indicação proibida.</strong> Sócio não comissiona venda para si, cônjuge, ascendente/descendente direto ou empresa controlada.</li>
+      <li><strong>Bloqueio de inflar temperatura.</strong> Lead "quente" que fechar fora dos critérios cai automaticamente para a temperatura real na auditoria mensal.</li>
+      <li><strong>Janela de atribuição:</strong> 90 dias (L1) / 180 dias (L2). Depois, o lead volta a ser "casa".</li>
+      <li><strong>Conflito entre sócios:</strong> o lead pertence a quem registrou primeiro no CRM com os dados mínimos. Sem registro, sem comissão.</li>
+      <li><strong>Recusa do cliente:</strong> se declarar por escrito que não autorizou o repasse, a indicação é anulada.</li>
+    </ol>
+
+    <div class="sec-title">5. Gatilho de pagamento</div>
+    <ul class="lp-list">
+      <li><strong>L1:</strong> pago 30 dias após instalação concluída e parcela de entrada paga (mín. 30% do contrato).</li>
+      <li><strong>L2:</strong> pago em duas parcelas — 60% na integralização do capital, 40% no início da operação da usina.</li>
+    </ul>
+    <div class="lp-callout"><strong>Cancelamento, distrato ou inadimplência</strong> nos primeiros 90 dias anula a comissão. Se já paga, é descontada da próxima comissão do sócio.</div>
+
+    <div class="sec-title">6. Registro obrigatório no CRM</div>
+    <div class="sec-sub" style="margin-bottom:6px">Todo lead, independentemente da temperatura, precisa entrar no CRM com:</div>
+    <ul class="lp-list">
+      <li>Data e canal de origem</li>
+      <li>Temperatura declarada pelo sócio (frio/morno/quente)</li>
+      <li><strong>Evidência da conversa prévia</strong> — gravação, registro de chamada ou ata (obrigatório, sem exceção)</li>
+      <li>Evidência da qualificação (foto da conta, e-mail, proposta solicitada…)</li>
+      <li>Sócio responsável</li>
+    </ul>
+    <div class="lp-callout"><strong>Sem registro = sem comissão. Sem conversa prévia = sem comissão.</strong> Não há exceção.</div>
+
+    <div class="sec-title">7. Revisão e governança</div>
+    <ul class="lp-list">
+      <li>Revisão trimestral dos percentuais e critérios, com base em CAC, ticket médio e conversão real por temperatura.</li>
+      <li>Auditoria mensal: o sócio que recebe a comissão não audita seu próprio lead — auditoria cruzada entre sócios.</li>
+      <li>Qualquer mudança exige aprovação dos dois sócios por escrito (ata simples).</li>
+    </ul>
+
+    <div style="height:24px"></div>
+  </div><!-- /leadsContent -->
+
 </div>
 
 <script>
@@ -763,16 +1072,23 @@ function setPartnerRegime(key, regime) {
 // ─────────────────────────────────────────────
 function setMode(mode) {
   currentMode = mode;
-  const isReinv = mode === 'reinvestimento';
-  const isFat   = mode === 'fat';
-  const isMeta  = mode === 'meta';
+  const isReinv    = mode === 'reinvestimento';
+  const isContrato = mode === 'contrato';
+  const isLeads    = mode === 'leads';
+  const isFat      = mode === 'fat';
+  const isMeta     = mode === 'meta';
+  const isDoc      = isReinv || isContrato || isLeads;
 
-  document.getElementById('btnMeta').classList.toggle('active',  isMeta);
-  document.getElementById('btnFat').classList.toggle('active',   isFat);
-  document.getElementById('btnReinv').classList.toggle('active', isReinv);
+  document.getElementById('btnMeta').classList.toggle('active',     isMeta);
+  document.getElementById('btnFat').classList.toggle('active',      isFat);
+  document.getElementById('btnReinv').classList.toggle('active',    isReinv);
+  document.getElementById('btnContrato').classList.toggle('active', isContrato);
+  document.getElementById('btnLeads').classList.toggle('active',    isLeads);
 
-  document.getElementById('calcContent').style.display     = isReinv ? 'none' : '';
+  document.getElementById('calcContent').style.display      = isDoc ? 'none' : '';
   document.getElementById('reinvestContent').style.display  = isReinv ? '' : 'none';
+  document.getElementById('contratoContent').style.display  = isContrato ? '' : 'none';
+  document.getElementById('leadsContent').style.display     = isLeads ? '' : 'none';
 
   document.getElementById('rowMeta').style.display           = isMeta ? '' : 'none';
   document.getElementById('rowMatheusRegime').style.display  = isFat  ? '' : 'none';
@@ -790,7 +1106,7 @@ function setMode(mode) {
     document.getElementById('summarySubTitle').textContent = 'Inclui remuneração + participação de lucros';
   }
 
-  if (!isReinv) calc();
+  if (!isDoc) calc();
 }
 
 // ─────────────────────────────────────────────
