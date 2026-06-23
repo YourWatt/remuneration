@@ -325,6 +325,49 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4f0;color:#1a
 .lp-list{font-size:12px;color:#555;line-height:1.7;margin:8px 0 12px;padding-left:18px}
 .lp-list li{margin-bottom:5px}
 .lp-list li strong{color:#1a1a18}
+
+/* ── PLANEJAMENTO INSTALAÇÃO TAB ── */
+.pl-intro{background:#E1F5EE;border-left:4px solid #1D9E75;border-radius:8px;padding:12px 15px;font-size:12px;color:#065f46;line-height:1.7;margin-bottom:14px}
+.pl-intro strong{color:#053d2c}
+.pl-calc{background:#fff;border:1px solid #e5e3db;border-radius:12px;padding:16px;margin-bottom:14px}
+.pl-calc-title{font-size:11px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.6px;margin-bottom:12px}
+.pl-controls{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:6px}
+.pl-field label{display:block;font-size:10px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.pl-field input{width:100%;padding:9px 11px;border:1px solid #e5e3db;border-radius:8px;font-size:14px;color:#1a1a18;font-variant-numeric:tabular-nums}
+.pl-field input:focus{outline:none;border-color:#1D9E75;box-shadow:0 0 0 2px #E1F5EE}
+.pl-scenario{display:flex;gap:0;border:1px solid #e5e3db;border-radius:8px;overflow:hidden}
+.pl-scn-btn{flex:1;padding:9px 6px;font-size:11px;font-weight:600;background:#fff;color:#888;border:none;cursor:pointer;line-height:1.3;transition:.15s}
+.pl-scn-btn.active{background:#1D9E75;color:#fff}
+.pl-scn-btn:not(.active):hover{background:#f3f5f4}
+.pl-scn-btn small{display:block;font-size:9px;font-weight:500;opacity:.85}
+.pl-hint{font-size:10.5px;color:#aaa;margin-top:10px;line-height:1.5}
+
+.pl-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.pl-sum{border-radius:10px;padding:12px;text-align:center;border:1px solid #e5e3db;background:#fff}
+.pl-sum-label{font-size:9.5px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.pl-sum-val{font-size:18px;font-weight:700;color:#1a1a18;font-variant-numeric:tabular-nums}
+.pl-sum-sub{font-size:10px;color:#aaa;margin-top:2px}
+.pl-sum.gross{background:#E1F5EE;border-color:#5DCAA5}
+.pl-sum.gross .pl-sum-val{color:#065f46}
+.pl-sum.profit{background:#EEEDFE;border-color:#AFA9EC}
+.pl-sum.profit .pl-sum-val{color:#3C3489}
+
+.pl-alloc{background:#fff;border:1px solid #e5e3db;border-radius:12px;padding:16px;margin-bottom:14px}
+.pl-alloc-title{font-size:11px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.6px;margin-bottom:12px}
+.pl-bar{margin-bottom:11px}
+.pl-bar-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+.pl-bar-name{font-size:12px;color:#444;font-weight:500}
+.pl-bar-name .pl-dot{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:7px;vertical-align:middle}
+.pl-bar-fig{font-size:11.5px;color:#888;font-variant-numeric:tabular-nums}
+.pl-bar-fig strong{color:#1a1a18;font-weight:700}
+.pl-bar-track{height:9px;background:#f0eee8;border-radius:5px;overflow:hidden}
+.pl-bar-fill{height:100%;border-radius:5px;transition:width .35s ease}
+.pl-bar.total .pl-bar-name{font-weight:700;color:#1a1a18}
+.pl-bar.total{border-top:1px solid #e5e3db;padding-top:10px;margin-top:4px}
+
+.pli-note{background:#fef3c7;border-left:4px solid #f59e0b;border-radius:7px;padding:10px 13px;font-size:11.5px;color:#92400e;line-height:1.6;margin:12px 0}
+.pli-note strong{color:#78350f}
+@media(max-width:600px){.pl-controls{grid-template-columns:1fr}.pl-summary{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -352,6 +395,8 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4f0;color:#1a
     <button class="mode-btn" id="btnContrato" onclick="setMode('contrato')">📄 Contrato Sunne</button>
     <div class="mode-sep"></div>
     <button class="mode-btn" id="btnLeads" onclick="setMode('leads')">🌡️ Política de Leads</button>
+    <div class="mode-sep"></div>
+    <button class="mode-btn" id="btnPlano" onclick="setMode('plano')">📐 Planejamento Instalação</button>
   </div>
 
   <!-- ── CALC CONTENT (hidden when reinvestimento tab is active) ── -->
@@ -992,6 +1037,110 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4f0;color:#1a
     <div style="height:24px"></div>
   </div><!-- /leadsContent -->
 
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- ── PLANEJAMENTO INSTALAÇÃO TAB ── -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div id="planoContent" style="display:none">
+
+    <div class="sec-title">Planejamento financeiro — Instalação de sistemas fotovoltaicos</div>
+    <div class="sec-sub" style="margin-bottom:14px">Receita one-shot por projeto · CMV consome 78–83% · margem bruta de 17–22% financia tudo o mais · Documento interno Abr/2026 · v1.0</div>
+
+    <div class="pl-intro">
+      A linha de instalação cobra o <strong>valor do projeto</strong>, paga o CMV (placas, inversor, mão-de-obra, frete, tributos) e fica com <strong>margem bruta de 17–22%</strong>. Essa margem é o <strong>100%</strong> a ser repartido: comissão, salários, overhead, marketing, pós-venda, capital de giro e lucro dos sócios precisam caber dentro dela. Lucro dos sócios travado em <strong>3% do projeto</strong> e capital de giro constante em <strong>2%</strong>, nos dois cenários.
+    </div>
+
+    <!-- ── CALCULADORA INTERATIVA ── -->
+    <div class="pl-calc">
+      <div class="pl-calc-title">Simulador de alocação da margem</div>
+      <div class="pl-controls">
+        <div class="pl-field">
+          <label for="plProjVal">Valor do projeto (R$)</label>
+          <input type="number" id="plProjVal" value="100000" min="0" step="1000" oninput="calcPlano()">
+        </div>
+        <div class="pl-field">
+          <label>Origem do lead</label>
+          <div class="pl-scenario">
+            <button class="pl-scn-btn active" id="plScnA" onclick="setPlanoScenario('A')">Cenário A<small>Parceiro · margem 22%</small></button>
+            <button class="pl-scn-btn" id="plScnB" onclick="setPlanoScenario('B')">Cenário B<small>Tráfego pago · margem 17%</small></button>
+          </div>
+        </div>
+      </div>
+      <div class="pl-hint" id="plMarginHint">Cada cenário tem alocação fixa. No Cenário B não há comissão de indicação (o custo de aquisição já está no marketing), por isso a margem mínima é menor — 17% contra 22% do Cenário A. Capital de giro fica em 2% nos dois.</div>
+    </div>
+
+    <!-- ── RESUMO ── -->
+    <div class="pl-summary">
+      <div class="pl-sum">
+        <div class="pl-sum-label">CMV (custo)</div>
+        <div class="pl-sum-val" id="plCmvVal">R$ 78.000</div>
+        <div class="pl-sum-sub" id="plCmvPct">78% do projeto</div>
+      </div>
+      <div class="pl-sum gross">
+        <div class="pl-sum-label">Margem bruta</div>
+        <div class="pl-sum-val" id="plGrossVal">R$ 22.000</div>
+        <div class="pl-sum-sub" id="plGrossPct">22% do projeto</div>
+      </div>
+      <div class="pl-sum profit">
+        <div class="pl-sum-label">Lucro sócios</div>
+        <div class="pl-sum-val" id="plProfitVal">R$ 3.000</div>
+        <div class="pl-sum-sub">3% do projeto (travado)</div>
+      </div>
+    </div>
+
+    <!-- ── ALOCAÇÃO DA MARGEM ── -->
+    <div class="pl-alloc">
+      <div class="pl-alloc-title">Para onde vai a margem bruta — rubrica a rubrica</div>
+      <div id="plBars"></div>
+    </div>
+
+    <div class="pli-note">
+      <strong>Lucro travado em 3%:</strong> o lucro dos sócios é fixo em 3% do projeto nos dois cenários. <strong>Capital de giro é constante em 2%.</strong> A diferença entre os cenários é só a comissão de indicação (5% no A, 0% no B), que muda a margem mínima (22% vs 17%). Em projetos &gt; R$ 150k, a comissão tem teto de 4,5%; em projetos &lt; R$ 20k, piso absoluto de R$ 1.000 por indicação.
+    </div>
+
+    <!-- ── COMPOSIÇÃO DO CMV (referência) ── -->
+    <div class="sec-title">Composição do CMV — onde sai o dinheiro antes da margem</div>
+    <div class="ct-card">
+      <div class="ct-card-body">
+        <table class="ct-table">
+          <thead><tr><th>Componente</th><th>% do projeto</th><th>Observação</th></tr></thead>
+          <tbody>
+            <tr><td>Placas fotovoltaicas</td><td>40–48%</td><td>Maior peso. Fornecedor (BYD, Canadian, Trina, Risen) move 3–5 p.p.</td></tr>
+            <tr><td>Inversor + acessórios elétricos</td><td>15–20%</td><td>Marca/potência; cabeamento, stringbox, disjuntores</td></tr>
+            <tr><td>Estrutura de fixação</td><td>5–7%</td><td>Telhado x solo x carport; alumínio importado volátil</td></tr>
+            <tr><td>Mão-de-obra de instalação</td><td>7–10%</td><td>Equipe própria ou terceirizada</td></tr>
+            <tr><td>Projeto, ART, homologação</td><td>2–3%</td><td>Engenheiro responsável + taxas</td></tr>
+            <tr><td>Frete e logística</td><td>3–5%</td><td>Penaliza projetos no AM (fluvial/aérea)</td></tr>
+            <tr><td>Tributos sobre venda</td><td>6%</td><td>ICMS, PIS, COFINS conforme regime</td></tr>
+            <tr><td><strong>CMV total</strong></td><td><strong>78–83%</strong></td><td>O que sai antes da margem disputada</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="pli-note"><strong>Implicação prática:</strong> economizar 1 p.p. no CMV (negociação de fornecedor, logística) vale mais que 1 p.p. de comissão. O foco de melhoria operacional precisa estar do lado do CMV — é onde mora o valor.</div>
+
+    <!-- ── ALOCAÇÃO POR FASE ── -->
+    <div class="sec-title">Como a alocação muda por fase do negócio</div>
+    <div class="ct-card">
+      <div class="ct-card-body">
+        <table class="ct-table">
+          <thead><tr><th>Rubrica</th><th>Fase 1 — Bootstrap<br><span style="font-weight:400;text-transform:none;letter-spacing:0">0–5 proj/mês</span></th><th>Fase 2 — Estável<br><span style="font-weight:400;text-transform:none;letter-spacing:0">5–15 proj/mês</span></th><th>Fase 3 — Escala<br><span style="font-weight:400;text-transform:none;letter-spacing:0">15+ proj/mês</span></th></tr></thead>
+          <tbody>
+            <tr><td>Comissão (Cenário A, média)</td><td>5%</td><td>5%</td><td>2,5%</td></tr>
+            <tr><td>Salários</td><td>6%</td><td>6%</td><td>6%</td></tr>
+            <tr><td>Overhead</td><td>3%</td><td>2%</td><td>2%</td></tr>
+            <tr><td>Marketing</td><td>3%</td><td>3%</td><td>3%</td></tr>
+            <tr><td>Pós-venda / garantia</td><td>1%</td><td>1%</td><td>2%</td></tr>
+            <tr><td>Capital de giro</td><td>2%</td><td>2%</td><td>2%</td></tr>
+            <tr><td>Lucro sócios (fixo)</td><td>3%</td><td>3%</td><td>3%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="pli-note"><strong>Gatilho de escala:</strong> ao atingir 10+ projetos/mês fechados em 2 trimestres consecutivos, a comissão volta ao tier padrão (1,5 / 2,5 / 4%). A economia de ~2,5 p.p. reduz a margem mínima exigida — preço mais competitivo — mantendo lucro dos sócios em 3% e giro em 2%.</div>
+
+    <div style="height:24px"></div>
+  </div><!-- /planoContent -->
+
 </div>
 
 <script>
@@ -1075,20 +1224,25 @@ function setMode(mode) {
   const isReinv    = mode === 'reinvestimento';
   const isContrato = mode === 'contrato';
   const isLeads    = mode === 'leads';
+  const isPlano    = mode === 'plano';
   const isFat      = mode === 'fat';
   const isMeta     = mode === 'meta';
-  const isDoc      = isReinv || isContrato || isLeads;
+  const isDoc      = isReinv || isContrato || isLeads || isPlano;
 
   document.getElementById('btnMeta').classList.toggle('active',     isMeta);
   document.getElementById('btnFat').classList.toggle('active',      isFat);
   document.getElementById('btnReinv').classList.toggle('active',    isReinv);
   document.getElementById('btnContrato').classList.toggle('active', isContrato);
   document.getElementById('btnLeads').classList.toggle('active',    isLeads);
+  document.getElementById('btnPlano').classList.toggle('active',    isPlano);
 
   document.getElementById('calcContent').style.display      = isDoc ? 'none' : '';
   document.getElementById('reinvestContent').style.display  = isReinv ? '' : 'none';
   document.getElementById('contratoContent').style.display  = isContrato ? '' : 'none';
   document.getElementById('leadsContent').style.display     = isLeads ? '' : 'none';
+  document.getElementById('planoContent').style.display     = isPlano ? '' : 'none';
+
+  if (isPlano) calcPlano();
 
   document.getElementById('rowMeta').style.display           = isMeta ? '' : 'none';
   document.getElementById('rowMatheusRegime').style.display  = isFat  ? '' : 'none';
@@ -1569,6 +1723,73 @@ function renderBonusPanel() {
   });
 
   document.getElementById('bonusCards').innerHTML = bonusHtml;
+}
+
+// ─────────────────────────────────────────────
+// PLANEJAMENTO INSTALAÇÃO
+// ─────────────────────────────────────────────
+let planoScenario = 'A';
+
+const PLANO_RUBRICAS = [
+  { key:'comissao',  name:'Comissão de indicação',          color:'#b45309', a:5, b:0, tag:'fixa' },
+  { key:'salarios',  name:'Salários — Comercial + Operação', color:'#1f6feb', a:6, b:6, tag:'fixo' },
+  { key:'overhead',  name:'Overhead (contábil, software)',   color:'#6b7280', a:2, b:2 },
+  { key:'marketing', name:'Marketing e prospecção',          color:'#db2777', a:3, b:3, tag:'fixo' },
+  { key:'posvenda',  name:'Pós-venda e garantia',            color:'#0891b2', a:1, b:1 },
+  { key:'giro',      name:'Capital de giro e reinvestimento', color:'#1D9E75', a:2, b:2, tag:'fixo' },
+  { key:'lucro',     name:'Lucro líquido — sócios',          color:'#7F77DD', a:3, b:3, tag:'fixo' },
+];
+
+function plTag(t){
+  return `<span style="display:inline-block;background:#f0eee8;color:#888;font-size:9px;font-weight:600;padding:1px 7px;border-radius:7px;margin-left:7px;vertical-align:middle">${t}</span>`;
+}
+
+function setPlanoScenario(s){
+  planoScenario = s;
+  document.getElementById('plScnA').classList.toggle('active', s === 'A');
+  document.getElementById('plScnB').classList.toggle('active', s === 'B');
+  calcPlano();
+}
+
+function calcPlano(){
+  const val = parseFloat(document.getElementById('plProjVal').value) || 0;
+  const isA = planoScenario === 'A';
+
+  // Margem = soma das rubricas do cenário (alocação fixa): A = 22%, B = 17%
+  const margin = PLANO_RUBRICAS.reduce((s, r) => s + (isA ? r.a : r.b), 0);
+  const cmvPct = 100 - margin;
+
+  document.getElementById('plCmvVal').textContent   = fmt(val * cmvPct / 100);
+  document.getElementById('plCmvPct').textContent   = cmvPct.toLocaleString('pt-BR') + '% do projeto';
+  document.getElementById('plGrossVal').textContent = fmt(val * margin / 100);
+  document.getElementById('plGrossPct').textContent = margin.toLocaleString('pt-BR') + '% do projeto';
+  document.getElementById('plProfitVal').textContent = fmt(val * 0.03);
+
+  let html = '';
+  PLANO_RUBRICAS.forEach(r => {
+    const pct  = isA ? r.a : r.b;
+    const rs   = val * pct / 100;
+    const barW = margin > 0 ? (pct / margin * 100) : 0;
+    const isZero = pct === 0;
+    html += `<div class="pl-bar"${isZero ? ' style="opacity:.45"' : ''}>
+      <div class="pl-bar-head">
+        <span class="pl-bar-name"><span class="pl-dot" style="background:${r.color}"></span>${r.name}${r.tag ? plTag(r.tag) : ''}</span>
+        <span class="pl-bar-fig"><strong>${fmt(rs)}</strong> · ${pct.toLocaleString('pt-BR')}%</span>
+      </div>
+      <div class="pl-bar-track"><div class="pl-bar-fill" style="width:${barW}%;background:${r.color}"></div></div>
+    </div>`;
+  });
+  html += `<div class="pl-bar total">
+    <div class="pl-bar-head">
+      <span class="pl-bar-name">Margem bruta total</span>
+      <span class="pl-bar-fig"><strong>${fmt(val * margin / 100)}</strong> · ${margin.toLocaleString('pt-BR')}%</span>
+    </div>
+  </div>`;
+  document.getElementById('plBars').innerHTML = html;
+
+  document.getElementById('plMarginHint').innerHTML = isA
+    ? `<strong>Cenário A — margem 22%.</strong> Comissão de 5% ao parceiro. Capital de giro 2%, lucro dos sócios 3%.`
+    : `<strong>Cenário B — margem 17%.</strong> Sem comissão de indicação (custo de aquisição já está no marketing). Capital de giro 2%, lucro dos sócios 3% — os mesmos 3% do Cenário A com margem menor.`;
 }
 
 calc();
