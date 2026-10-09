@@ -132,7 +132,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4f0;color:#1a
 .proj-total-pill span{color:#6ee7b7}
 
 /* Add form */
-.proj-add-form{display:grid;grid-template-columns:1fr 140px 150px auto;gap:8px;padding:12px 16px;border-bottom:1px solid #f0eee8;background:#f9f9f7;align-items:center}
+.proj-add-form{display:grid;grid-template-columns:1fr 130px 140px 150px auto;gap:8px;padding:12px 16px;border-bottom:1px solid #f0eee8;background:#f9f9f7;align-items:center}
 .proj-input{border:1.5px solid #e5e3db;border-radius:7px;padding:7px 10px;font-size:12px;color:#1a1a18;font-family:inherit;outline:none;background:#fff;transition:border-color .15s;width:100%}
 .proj-input:focus{border-color:#1a1a18}
 .proj-input::placeholder{color:#bbb}
@@ -149,12 +149,13 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4f0;color:#1a
 /* Project list */
 .proj-list{max-height:280px;overflow-y:auto}
 .proj-list-empty{padding:28px 16px;text-align:center;color:#bbb;font-size:12px}
-.proj-row{display:grid;grid-template-columns:1fr 120px 140px 28px;gap:8px;align-items:center;padding:9px 16px;border-bottom:1px solid #f5f3ef;transition:background .1s}
+.proj-row{display:grid;grid-template-columns:1fr 110px 120px 120px 28px;gap:8px;align-items:center;padding:9px 16px;border-bottom:1px solid #f5f3ef;transition:background .1s}
 .proj-row:last-child{border-bottom:none}
 .proj-row:hover{background:#fafaf8}
 .proj-row-name{font-size:12px;font-weight:600;color:#1a1a18;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .proj-row-val{font-size:12px;font-weight:700;color:#1a1a18;text-align:right}
 .proj-lead-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:12px;font-size:10.5px;font-weight:700;white-space:nowrap}
+.proj-closer-none{font-size:10.5px;color:#bbb}
 .proj-remove-btn{background:none;border:none;cursor:pointer;color:#ddd;font-size:14px;font-weight:700;border-radius:4px;padding:2px 5px;transition:color .15s,background .15s;line-height:1}
 .proj-remove-btn:hover{color:#ef4444;background:#fef2f2}
 
@@ -489,15 +490,8 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4f0;color:#1a
           <span class="proj-val-prefix">R$</span>
           <input class="proj-val-input" type="number" id="projVal" placeholder="0" min="0" step="1000" onkeydown="if(event.key==='Enter')addProject()">
         </div>
-        <select class="proj-select" id="projLead">
-          <option value="gabriel">🟣 Gabriel</option>
-          <option value="matheus">🟢 Matheus</option>
-          <option value="renio">🔵 Renio</option>
-          <option value="rodrigo">🟡 Rodrigo</option>
-          <option value="aquiles">🩵 Aquiles</option>
-          <option value="lucas">⚪ Lucas</option>
-          <option value="outros">🔗 Outros / Externo</option>
-        </select>
+        <select class="proj-select" id="projLead" title="Quem trouxe o lead"></select>
+        <select class="proj-select" id="projCloser" title="Closer — 2% do projeto para quem fechou"></select>
         <button class="proj-add-btn" onclick="addProject()">+ Adicionar</button>
       </div>
 
@@ -528,7 +522,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4f0;color:#1a
         </div>
         <div class="proj-foot-divider"></div>
         <div class="proj-foot-kv">
-          <span class="proj-foot-label">Pool Bônus Indicação</span>
+          <span class="proj-foot-label">Pool Bônus (Indicação + Closer)</span>
           <span class="proj-foot-val" id="footBonusPool">—</span>
         </div>
         <div class="proj-foot-divider"></div>
@@ -598,7 +592,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4f0;color:#1a
   <!-- ── BÔNUS POR INDICAÇÃO (fat mode only) ── -->
   <div id="bonusPanelSection" style="display:none">
     <div class="bonus-panel">
-      <div class="bonus-panel-title">🏆 Bônus por Indicação do Mês</div>
+      <div class="bonus-panel-title">🏆 Bônus do Mês (Indicação + Closer)</div>
       <div class="bonus-panel-sub" id="bonusPanelSub"></div>
       <div class="bonus-cards-grid" id="bonusCards"></div>
     </div>
@@ -629,6 +623,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4f0;color:#1a
       &nbsp;&nbsp;• Pool executivo (<span id="expExec">30%</span> do pool) → Matheus: prêmio CEO + CTO + CFO<br>
       &nbsp;&nbsp;• Pool de projeto (<span id="expProj">70%</span> do pool) → Gabriel (85,5%) + Matheus (14,5%)<br><br>
       <strong>Bônus por indicação</strong> (<span id="expBonus">5%</span> do fat. do projeto) → pago ao sócio que trouxe o lead. No modo real, cada projeto tem seu próprio indicador.<br>
+      <strong>Bônus do closer</strong> (2% do projeto) → no modo real, marque em cada projeto se houve closer e quem fechou. Sem closer, nada é pago.<br>
       <strong>Remuneração de Matheus (pro-labore)</strong> = (pool de projeto × 14,5% + pool executivo) ÷ 1,11 → pro-labore bruto<br><br>
       <strong>Participação de lucros</strong> (<span id="expLucro">3%</span> do fat.) é dividida igualmente entre os <span id="expSocios">6</span> sócios = <strong id="expPerSocio">0,5%</strong> cada. Como dividendo, é <strong>isenta de INSS e IRPF</strong>.<br><br>
       No modo <strong>Faturamento Real</strong>, cada projeto é cadastrado individualmente com seu valor e quem trouxe o lead — o bônus é calculado por projeto, não sobre o total do faturamento.
@@ -1162,6 +1157,32 @@ const PARTNERS = {
   outros:  { label:'Externos',emoji:'🔗', badgeCls:'lc-outros',  color:'#86198f' },
 };
 
+// Bônus do closer: % do projeto pago a quem fechou (usado no Faturamento Real e no Planejamento).
+const CLOSER_BONUS_PCT = 2;
+
+// Preenche um <select> com os sócios de PARTNERS (emptyLabel opcional = opção "nenhum").
+function fillPartnerSelect(id, emptyLabel) {
+  const opts = Object.entries(PARTNERS).map(([k, p]) => `<option value="${k}">${p.emoji} ${p.label}</option>`);
+  if (emptyLabel) opts.unshift(`<option value="">${emptyLabel}</option>`);
+  document.getElementById(id).innerHTML = opts.join('');
+}
+
+// Bônus por sócio: indicação (bonusPct × valor → lead) + closer (2% × valor → closer, se houver).
+// Retorna { [sócio]: { lead, closer, total } }.
+function partnerBonuses(projects, bonusPct) {
+  const by = {};
+  const add = (key, field, v) => {
+    const b = by[key] || (by[key] = { lead: 0, closer: 0, total: 0 });
+    b[field] += v;
+    b.total  += v;
+  };
+  projects.forEach(p => {
+    add(p.lead, 'lead', bonusPct * p.val);
+    if (p.closer) add(p.closer, 'closer', CLOSER_BONUS_PCT / 100 * p.val);
+  });
+  return by;
+}
+
 // ─────────────────────────────────────────────
 // STATE
 // ─────────────────────────────────────────────
@@ -1274,12 +1295,13 @@ function setMode(mode) {
 function addProject() {
   const name = document.getElementById('projName').value.trim();
   const val  = parseFloat(document.getElementById('projVal').value);
-  const lead = document.getElementById('projLead').value;
+  const lead   = document.getElementById('projLead').value;
+  const closer = document.getElementById('projCloser').value; // '' = sem closer
   if (!name || !val || val <= 0) {
     document.getElementById('projName').focus();
     return;
   }
-  projects.push({ id: ++projId, name, val, lead });
+  projects.push({ id: ++projId, name, val, lead, closer });
   document.getElementById('projName').value = '';
   document.getElementById('projVal').value  = '';
   document.getElementById('projName').focus();
@@ -1316,10 +1338,13 @@ function renderProjects() {
 
   list.innerHTML = projects.map(p => {
     const pt = PARTNERS[p.lead];
+    const ct = PARTNERS[p.closer];
     return `<div class="proj-row">
       <span class="proj-row-name" title="${p.name}">${p.name}</span>
       <span class="proj-row-val">${fmt(p.val)}</span>
-      <span class="proj-lead-badge ${pt.badgeCls}">${pt.emoji} ${pt.label}</span>
+      <span class="proj-lead-badge ${pt.badgeCls}" title="Lead">${pt.emoji} ${pt.label}</span>
+      ${ct ? `<span class="proj-lead-badge ${ct.badgeCls}" title="Closer (${CLOSER_BONUS_PCT}%)">🤝 ${ct.label}</span>`
+           : `<span class="proj-closer-none">sem closer</span>`}
       <button class="proj-remove-btn" onclick="removeProject(${p.id})" title="Remover">×</button>
     </div>`;
   }).join('');
@@ -1439,16 +1464,13 @@ function calc() {
   let fatR = 0, bonusByPartner = {}, gabrielBonus = 0;
   if (isFatMode) {
     fatR = projects.reduce((s,p) => s + p.val, 0);
-    // Bonus per project goes to lead owner
-    projects.forEach(p => {
-      const b = bonusPct * p.val;
-      bonusByPartner[p.lead] = (bonusByPartner[p.lead] || 0) + b;
-    });
-    gabrielBonus = bonusByPartner['gabriel'] || 0;
+    // Bônus por projeto: indicação → lead, 2% → closer (se houver)
+    bonusByPartner = partnerBonuses(projects, bonusPct);
+    gabrielBonus = bonusByPartner.gabriel ? bonusByPartner.gabriel.total : 0;
 
     // Update project footer
     if (projects.length > 0) {
-      const totalBonusPool = Object.values(bonusByPartner).reduce((s,v)=>s+v,0);
+      const totalBonusPool = Object.values(bonusByPartner).reduce((s,b)=>s+b.total,0);
       document.getElementById('footCount').textContent = projects.length+(projects.length===1?' projeto':' projetos');
       document.getElementById('footTotal').textContent = fmt(fatR);
       document.getElementById('footPool').textContent  = fmt(poolPct * fatR);
@@ -1457,8 +1479,8 @@ function calc() {
     }
   }
 
-  // Matheus lead bonus (fat mode only)
-  const matheusLeadBonus = isFatMode ? (bonusByPartner['matheus'] || 0) : 0;
+  // Matheus bonus — indicação + closer (fat mode only)
+  const matheusLeadBonus = isFatMode && bonusByPartner.matheus ? bonusByPartner.matheus.total : 0;
   const mBonusCalc = matheusLeadBonus > 0 ? calcBonusNet(matheusLeadBonus, matheusRegime) : null;
 
   // ── BUILD SCENARIOS ──
@@ -1505,7 +1527,7 @@ function calc() {
     const fatLabel  = isFatMode ? 'faturamento informado' : 'faturamento/mês necessário';
     const bestTag   = isFatMode ? '★ MELHOR REGIME GABRIEL' : '★ MAIOR TOTAL MATHEUS';
     const bonusLabel = isFatMode
-      ? `Bônus leads Gabriel (${parseFloat(document.getElementById('sBonus').value)}%)`
+      ? `Bônus Gabriel (leads ${parseFloat(document.getElementById('sBonus').value)}% + closer)`
       : `Bônus de leads (${parseFloat(document.getElementById('sBonus').value)}%)`;
 
     cardsHtml += `
@@ -1557,7 +1579,7 @@ function calc() {
           <div class="brow"><span class="brow-label">💰 Part. lucros (${plRefSub})</span><span class="brow-val accent-pl">${fmt(plVal)}</span></div>
           ${isFatMode && mBonusNet > 0 ? `
           <div class="brow" style="border-top:1px dashed #f59e0b22;margin-top:2px;padding-top:4px">
-            <span class="brow-label">🏆 Bônus leads Matheus (líq. ${matheusRegime==='pjiii'?'PJ':'PL'})</span>
+            <span class="brow-label">🏆 Bônus Matheus — leads + closer (líq. ${matheusRegime==='pjiii'?'PJ':'PL'})</span>
             <span class="brow-val accent-bonus">${fmt(mBonusNet)}</span>
           </div>` : ''}
           <div class="total-box total-box-m">
@@ -1635,12 +1657,7 @@ function renderBonusPanel() {
 
   const bonusPct = parseFloat(document.getElementById('sBonus').value) / 100;
 
-  // Rebuild bonusByPartner from current projects
-  const bonusByPartner = {};
-  projects.forEach(p => {
-    const b = bonusPct * p.val;
-    bonusByPartner[p.lead] = (bonusByPartner[p.lead] || 0) + b;
-  });
+  const bonusByPartner = partnerBonuses(projects, bonusPct);
 
   const partnerKeys = Object.keys(bonusByPartner);
   if (partnerKeys.length === 0) { bonusPanelSection.style.display = 'none'; return; }
@@ -1648,20 +1665,26 @@ function renderBonusPanel() {
   bonusPanelSection.style.display = 'block';
   const bonusPctVal = parseFloat(document.getElementById('sBonus').value);
   document.getElementById('bonusPanelSub').textContent =
-    `${bonusPctVal}% aplicado sobre o valor de cada projeto para o sócio que trouxe o lead · ${partnerKeys.length} sócio${partnerKeys.length>1?'s':''} com bônus este mês`;
+    `${bonusPctVal}% do projeto para quem trouxe o lead + ${CLOSER_BONUS_PCT}% para o closer (quando houver) · ${partnerKeys.length} sócio${partnerKeys.length>1?'s':''} com bônus este mês`;
 
   const sorted = [...partnerKeys].sort((a,b) => {
     if (a==='outros' && b!=='outros') return 1;
     if (b==='outros' && a!=='outros') return -1;
-    return bonusByPartner[b] - bonusByPartner[a];
+    return bonusByPartner[b].total - bonusByPartner[a].total;
   });
 
   let bonusHtml = '';
   sorted.forEach(key => {
     const pt     = PARTNERS[key];
-    const bonus  = bonusByPartner[key];
-    const myProj = projects.filter(p => p.lead === key);
-    const myFat  = myProj.reduce((s,p) => s+p.val, 0);
+    const pb     = bonusByPartner[key];
+    const bonus  = pb.total;
+    const myProj = projects.filter(p => p.lead === key || p.closer === key);
+    const myFat  = projects.filter(p => p.lead === key).reduce((s,p) => s+p.val, 0);
+    const role   = p => [p.lead === key && 'lead', p.closer === key && 'closer'].filter(Boolean).join(' + ');
+    // Separação indicação / closer (só aparece quando há closer)
+    const splitHtml = pb.closer ? `
+          <div class="bbd-row"><span>Indicação (${bonusPctVal}%)</span><span>${fmt(pb.lead)}</span></div>
+          <div class="bbd-row"><span>Closer (${CLOSER_BONUS_PCT}%)</span><span>${fmt(pb.closer)}</span></div>` : '';
     const isOut  = key === 'outros';
     const isGab  = key === 'gabriel';
     const hasRegime = !isOut && !isGab && partnerRegimes[key] !== undefined;
@@ -1683,13 +1706,15 @@ function renderBonusPanel() {
     if (isOut) {
       breakdownHtml = `
         <div class="bonus-breakdown">
+          ${splitHtml}
           <div class="bbd-row"><span>Custo externo (bruto)</span><span>${fmt(bonus)}</span></div>
         </div>
         <div class="bonus-outros-note" style="margin-top:6px">⚠️ Indicação externa — verificar acordo comercial</div>`;
     } else if (isGab) {
       breakdownHtml = `
         <div class="bonus-breakdown">
-          <div class="bbd-row"><span>Bônus bruto (seus leads)</span><span>${fmt(bonus)}</span></div>
+          ${splitHtml}
+          <div class="bbd-row"><span>Bônus bruto total</span><span>${fmt(bonus)}</span></div>
         </div>
         <div class="bonus-gabriel-note">📊 Impacto líquido por regime mostrado nos cenários acima</div>`;
     } else {
@@ -1708,7 +1733,7 @@ function renderBonusPanel() {
           <div class="bbd-row"><span>${bn.impLabel}</span><span>−${fmt(bn.inssP)}</span></div>
           <div class="bbd-row bbd-net"><span>Líquido a receber</span><span>${fmt(bn.net)}</span></div>`;
       }
-      breakdownHtml = `<div class="bonus-breakdown">${rows}</div>`;
+      breakdownHtml = `<div class="bonus-breakdown">${splitHtml}${rows}</div>`;
     }
 
     bonusHtml += `
@@ -1717,11 +1742,11 @@ function renderBonusPanel() {
       <ul class="bonus-proj-list">
         ${myProj.map(p=>`
           <li>
-            <span class="bonus-proj-item-name" title="${p.name}">${p.name}</span>
+            <span class="bonus-proj-item-name" title="${p.name} (${role(p)})">${p.name} · ${role(p)}</span>
             <span class="bonus-proj-item-val">${fmt(p.val)}</span>
           </li>`).join('')}
       </ul>
-      <div class="bonus-fat-sub">${myProj.length} projeto${myProj.length>1?'s':''} · ${fmt(myFat)} indicados</div>
+      <div class="bonus-fat-sub">${myProj.length} projeto${myProj.length>1?'s':''} ${myFat ? ' · ' + fmt(myFat) + ' indicados' : ''}${pb.closer ? ' · ' + fmt(pb.closer) + ' de closer' : ''}</div>
       ${regimeToggleHtml}
       ${breakdownHtml}
     </div>`;
@@ -1746,8 +1771,7 @@ const PLANO_RUBRICAS = [
 ];
 
 // Bônus do closer: pago só quando a margem real cobre o piso do cenário + o próprio bônus
-// (ex.: Cenário B, piso 17% → closer ganha 2% se margem ≥ 19%).
-const CLOSER_BONUS_PCT = 2;
+// (ex.: Cenário B, piso 17% → closer ganha 2% se margem ≥ 19%). CLOSER_BONUS_PCT fica no topo.
 function closerBonusPct(margin, floor){
   return margin >= floor + CLOSER_BONUS_PCT ? CLOSER_BONUS_PCT : 0;
 }
@@ -1815,6 +1839,8 @@ function calcPlano(){
     : `<strong>Cenário B — margem mínima 17%.</strong> Sem comissão de indicação (custo de aquisição já está no marketing). Capital de giro 2%, lucro dos sócios 3% — os mesmos 3% do Cenário A com margem menor.`) + closerMsg;
 }
 
+fillPartnerSelect('projLead');
+fillPartnerSelect('projCloser', '🤝 Sem closer');
 calc();
 </script>
 </body>
