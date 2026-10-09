@@ -65,6 +65,14 @@ Por sócio   = total lucros ÷ nSócios
 ```
 Distribuído igualmente entre os 6 sócios (incluindo Lucas). Isento de INSS e IRPF como dividendo.
 
+### Planejamento Instalação — bônus do closer
+Cada cenário tem uma **margem mínima (piso)** igual à soma das rubricas fixas: **A = 22%**, **B = 17%**.
+Informe a *margem bruta real* do projeto (vazio = piso). Quem fecha o projeto (closer) ganha **2% do projeto** quando:
+```
+margem real ≥ piso do cenário + 2%      → Cenário B: margem ≥ 19% · Cenário A: margem ≥ 24%
+```
+Abaixo disso o bônus é 0%. O que sobrar acima do piso + bônus aparece como *Excedente de margem*; abaixo do piso, como *Déficit*.
+
 ---
 
 ## 👥 Sócios
