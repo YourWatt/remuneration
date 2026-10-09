@@ -14,7 +14,7 @@ Ferramenta interna de simulação de remuneração para os sócios **Gabriel** e
 Informe a **meta mensal de remuneração** de Gabriel e a calculadora determina o faturamento necessário para atingi-la em cada regime tributário. Útil para planejamento e definição de metas comerciais.
 
 ### 📋 Faturamento Real por Projeto
-Cadastre os **projetos do mês individualmente**, com valor e o sócio que trouxe o lead. A calculadora distribui automaticamente os pools, bônus e lucros com base no faturamento real.
+Cadastre os **projetos do mês individualmente**, com valor, o sócio que trouxe o lead e — se houve — **quem fechou (closer)**. A calculadora distribui automaticamente os pools, bônus e lucros com base no faturamento real.
 
 ---
 
@@ -57,6 +57,15 @@ Pool de projeto = restante do pool total
 
 ### Bônus por indicação de lead
 No modo Faturamento Real, cada projeto tem um responsável pelo lead. O bônus (`% × valor do projeto`) é calculado individualmente por projeto e pago ao sócio indicador — com dedução conforme seu regime de recebimento (Pro-labore ou PJ AN.III). MEI disponível apenas para Gabriel.
+
+### Bônus do closer (modo Faturamento Real)
+Cada projeto tem um campo **Closer 2%**: escolha *Sem closer* ou o sócio que fechou o projeto.
+```
+Bônus closer = 2% × valor do projeto   → pago ao closer (0 se "Sem closer")
+Bônus total do sócio = indicação + closer   (somados no painel de bônus e nos totais de Gabriel/Matheus)
+```
+Marque o closer quando a regra da aba *Planejamento Instalação* for atendida (margem ≥ piso do cenário + 2%).
+O mesmo sócio pode ser lead e closer do projeto. O percentual vem da constante `CLOSER_BONUS_PCT`, compartilhada pelas duas abas.
 
 ### Participação de lucros
 ```
