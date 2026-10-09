@@ -412,7 +412,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4f0;color:#1a
       <div class="sl-row">
         <span class="sl-label">Meta mensal de Gabriel</span>
         <input type="range" min="2000" max="15000" value="5000" step="100" id="sTarget" oninput="calc()">
-        <span class="sl-val" id="vTarget">R$ 5.000</span>
+        <span class="sl-val" id="vTarget">R$ 5.000,00</span>
       </div>
     </div>
 
@@ -479,7 +479,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4f0;color:#1a
       <div class="proj-manager-header">
         <div class="proj-manager-title">📋 Projetos do Mês</div>
         <div class="proj-total-pill" id="projTotalPill">
-          <span id="projCount">0 projetos</span> · Total: <span id="projTotalVal">R$ 0</span>
+          <span id="projCount">0 projetos</span> · Total: <span id="projTotalVal">R$ 0,00</span>
         </div>
       </div>
 
@@ -1328,7 +1328,7 @@ function renderProjects() {
     </div>`;
     footer.style.display = 'none';
     document.getElementById('projCount').textContent = '0 projetos';
-    document.getElementById('projTotalVal').textContent = 'R$ 0';
+    document.getElementById('projTotalVal').textContent = fmt(0);
     return;
   }
 
@@ -1356,7 +1356,8 @@ function renderProjects() {
 // ─────────────────────────────────────────────
 // CALC ENGINE
 // ─────────────────────────────────────────────
-function fmt(v){ return 'R$ '+Math.round(v).toLocaleString('pt-BR') }
+// Valores em R$ sempre com duas casas decimais (ex.: R$ 1.234,50)
+function fmt(v){ return 'R$ '+v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
 
 const gabRegimes = [
   {key:'g-pl',  name:'Pro-labore',         badgeText:'Pro-labore',
@@ -1541,7 +1542,7 @@ function calc() {
           <div class="sc-fat" style="margin-top:2px">Pool total: <strong>${fmt(mE.totalPool)}</strong> · Proj.: <strong>${fmt(gE.projPool + mE.mProjCost)}</strong> · Exec.: <strong>${fmt(mE.execPool)}</strong></div>
         </div>
         <div>
-          <div class="sc-fat-num">${fmt(Math.round(R))}</div>
+          <div class="sc-fat-num">${fmt(R)}</div>
           <div class="sc-fat-label">${fatLabel}</div>
         </div>
       </div>

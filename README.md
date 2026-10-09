@@ -105,6 +105,8 @@ remuneration/
 └── README.md    # Este arquivo
 ```
 
+Todos os valores em R$ são exibidos com **duas casas decimais** (ex.: R$ 1.234,50) pela função `fmt()`, sem arredondar para inteiro.
+
 A calculadora é um **single-file app** sem dependências externas — funciona diretamente no browser sem servidor.
 
 ---
