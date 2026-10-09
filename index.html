@@ -155,7 +155,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4f0;color:#1a
 .proj-row-name{font-size:12px;font-weight:600;color:#1a1a18;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .proj-row-val{font-size:12px;font-weight:700;color:#1a1a18;text-align:right}
 .proj-lead-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:12px;font-size:10.5px;font-weight:700;white-space:nowrap}
-.proj-closer-none{font-size:10.5px;color:#bbb}
+.proj-badge-none{font-size:10.5px;color:#bbb}
 .proj-remove-btn{background:none;border:none;cursor:pointer;color:#ddd;font-size:14px;font-weight:700;border-radius:4px;padding:2px 5px;transition:color .15s,background .15s;line-height:1}
 .proj-remove-btn:hover{color:#ef4444;background:#fef2f2}
 
@@ -1167,7 +1167,7 @@ function fillPartnerSelect(id, emptyLabel) {
   document.getElementById(id).innerHTML = opts.join('');
 }
 
-// Bônus por sócio: indicação (bonusPct × valor → lead) + closer (2% × valor → closer, se houver).
+// Bônus por sócio: indicação (bonusPct × valor → lead, se houver) + closer (2% × valor → closer, se houver).
 // Retorna { [sócio]: { lead, closer, total } }.
 function partnerBonuses(projects, bonusPct) {
   const by = {};
@@ -1177,7 +1177,7 @@ function partnerBonuses(projects, bonusPct) {
     b.total  += v;
   };
   projects.forEach(p => {
-    add(p.lead, 'lead', bonusPct * p.val);
+    if (p.lead)   add(p.lead,   'lead',   bonusPct * p.val);
     if (p.closer) add(p.closer, 'closer', CLOSER_BONUS_PCT / 100 * p.val);
   });
   return by;
@@ -1295,7 +1295,7 @@ function setMode(mode) {
 function addProject() {
   const name = document.getElementById('projName').value.trim();
   const val  = parseFloat(document.getElementById('projVal').value);
-  const lead   = document.getElementById('projLead').value;
+  const lead   = document.getElementById('projLead').value;   // '' = sem indicação
   const closer = document.getElementById('projCloser').value; // '' = sem closer
   if (!name || !val || val <= 0) {
     document.getElementById('projName').focus();
@@ -1342,9 +1342,10 @@ function renderProjects() {
     return `<div class="proj-row">
       <span class="proj-row-name" title="${p.name}">${p.name}</span>
       <span class="proj-row-val">${fmt(p.val)}</span>
-      <span class="proj-lead-badge ${pt.badgeCls}" title="Lead">${pt.emoji} ${pt.label}</span>
+      ${pt ? `<span class="proj-lead-badge ${pt.badgeCls}" title="Lead">${pt.emoji} ${pt.label}</span>`
+           : `<span class="proj-badge-none">sem indicação</span>`}
       ${ct ? `<span class="proj-lead-badge ${ct.badgeCls}" title="Closer (${CLOSER_BONUS_PCT}%)">🤝 ${ct.label}</span>`
-           : `<span class="proj-closer-none">sem closer</span>`}
+           : `<span class="proj-badge-none">sem closer</span>`}
       <button class="proj-remove-btn" onclick="removeProject(${p.id})" title="Remover">×</button>
     </div>`;
   }).join('');
@@ -1839,7 +1840,7 @@ function calcPlano(){
     : `<strong>Cenário B — margem mínima 17%.</strong> Sem comissão de indicação (custo de aquisição já está no marketing). Capital de giro 2%, lucro dos sócios 3% — os mesmos 3% do Cenário A com margem menor.`) + closerMsg;
 }
 
-fillPartnerSelect('projLead');
+fillPartnerSelect('projLead', '🚫 Sem indicação');
 fillPartnerSelect('projCloser', '🤝 Sem closer');
 calc();
 </script>

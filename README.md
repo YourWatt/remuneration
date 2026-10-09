@@ -56,7 +56,7 @@ Pool de projeto = restante do pool total
 | **PJ AN.III** | custo × 0,94 = líquido (sem encargos patronais) |
 
 ### Bônus por indicação de lead
-No modo Faturamento Real, cada projeto tem um responsável pelo lead. O bônus (`% × valor do projeto`) é calculado individualmente por projeto e pago ao sócio indicador — com dedução conforme seu regime de recebimento (Pro-labore ou PJ AN.III). MEI disponível apenas para Gabriel.
+No modo Faturamento Real, cada projeto tem um responsável pelo lead — ou **Sem indicação** (padrão), quando ninguém recebe bônus de lead. O bônus (`% × valor do projeto`) é calculado individualmente por projeto e pago ao sócio indicador — com dedução conforme seu regime de recebimento (Pro-labore ou PJ AN.III). MEI disponível apenas para Gabriel.
 
 ### Bônus do closer (modo Faturamento Real)
 Cada projeto tem um campo **Closer 2%**: escolha *Sem closer* ou o sócio que fechou o projeto.
