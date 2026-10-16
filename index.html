@@ -132,7 +132,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4f0;color:#1a
 .proj-total-pill span{color:#6ee7b7}
 
 /* Add form */
-.proj-add-form{display:grid;grid-template-columns:1fr 130px 140px 150px auto;gap:8px;padding:12px 16px;border-bottom:1px solid #f0eee8;background:#f9f9f7;align-items:center}
+.proj-add-form{display:grid;grid-template-columns:1fr 120px 130px 190px 130px auto;gap:8px;padding:12px 16px;border-bottom:1px solid #f0eee8;background:#f9f9f7;align-items:center}
 .proj-input{border:1.5px solid #e5e3db;border-radius:7px;padding:7px 10px;font-size:12px;color:#1a1a18;font-family:inherit;outline:none;background:#fff;transition:border-color .15s;width:100%}
 .proj-input:focus{border-color:#1a1a18}
 .proj-input::placeholder{color:#bbb}
@@ -142,6 +142,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4f0;color:#1a
 .proj-val-input{border:none;outline:none;background:transparent;font-size:12px;font-weight:700;color:#1a1a18;width:100%;padding:7px 4px;font-family:inherit}
 .proj-select{border:1.5px solid #e5e3db;border-radius:7px;padding:7px 8px;font-size:12px;color:#1a1a18;font-family:inherit;outline:none;background:#fff;cursor:pointer;transition:border-color .15s;width:100%}
 .proj-select:focus{border-color:#1a1a18}
+.proj-ext{display:grid;grid-template-columns:1fr 72px;gap:6px}
 .proj-add-btn{background:#1a1a18;color:#fff;border:none;border-radius:7px;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:opacity .15s}
 .proj-add-btn:hover{opacity:.85}
 .proj-add-btn:active{opacity:.7}
@@ -149,12 +150,12 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4f0;color:#1a
 /* Project list */
 .proj-list{max-height:280px;overflow-y:auto}
 .proj-list-empty{padding:28px 16px;text-align:center;color:#bbb;font-size:12px}
-.proj-row{display:grid;grid-template-columns:1fr 110px 120px 120px 28px;gap:8px;align-items:center;padding:9px 16px;border-bottom:1px solid #f5f3ef;transition:background .1s}
+.proj-row{display:grid;grid-template-columns:1fr 110px 210px 110px 28px;gap:8px;align-items:center;padding:9px 16px;border-bottom:1px solid #f5f3ef;transition:background .1s}
 .proj-row:last-child{border-bottom:none}
 .proj-row:hover{background:#fafaf8}
 .proj-row-name{font-size:12px;font-weight:600;color:#1a1a18;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .proj-row-val{font-size:12px;font-weight:700;color:#1a1a18;text-align:right}
-.proj-lead-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:12px;font-size:10.5px;font-weight:700;white-space:nowrap}
+.proj-lead-badge{display:inline-block;padding:2px 9px;border-radius:12px;font-size:10.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 .proj-badge-none{font-size:10.5px;color:#bbb}
 .proj-remove-btn{background:none;border:none;cursor:pointer;color:#ddd;font-size:14px;font-weight:700;border-radius:4px;padding:2px 5px;transition:color .15s,background .15s;line-height:1}
 .proj-remove-btn:hover{color:#ef4444;background:#fef2f2}
@@ -192,7 +193,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4f0;color:#1a
 .bonus-card-name{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;display:flex;align-items:center;gap:5px}
 .bonus-proj-list{font-size:10.5px;color:#666;line-height:1.7;margin-bottom:6px;list-style:none}
 .bonus-proj-list li{display:flex;justify-content:space-between;padding:1px 0}
-.bonus-proj-item-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:120px;color:#888}
+.bonus-proj-item-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:150px;color:#888}
 .bonus-proj-item-val{font-weight:600;color:#1a1a18;white-space:nowrap}
 .bonus-fat-sub{font-size:10px;color:#aaa;margin-bottom:8px}
 
@@ -490,7 +491,17 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4f0;color:#1a
           <span class="proj-val-prefix">R$</span>
           <input class="proj-val-input" type="number" id="projVal" placeholder="0" min="0" step="1000" onkeydown="if(event.key==='Enter')addProject()">
         </div>
-        <select class="proj-select" id="projLead" title="Quem trouxe o lead"></select>
+        <select class="proj-select" id="projLead" title="Quem trouxe o lead" onchange="onLeadChange()"></select>
+        <!-- Lead interno: % pela temperatura (Política de Leads). Opções geradas de LEAD_TEMPS. -->
+        <select class="proj-select" id="projTemp" title="Temperatura do lead — Política de Leads" style="display:none"></select>
+        <!-- Lead externo: quem recebe + % negociado -->
+        <div class="proj-ext" id="projExt" style="display:none">
+          <input class="proj-input" type="text" id="projRecipient" placeholder="Quem recebe…">
+          <div class="proj-val-wrap">
+            <input class="proj-val-input" type="number" id="projPct" placeholder="0" min="0" max="100" step="0.5" title="% negociado">
+            <span class="proj-val-prefix">%</span>
+          </div>
+        </div>
         <select class="proj-select" id="projCloser" title="Closer — 2% do projeto para quem fechou"></select>
         <button class="proj-add-btn" onclick="addProject()">+ Adicionar</button>
       </div>
@@ -622,7 +633,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4f0;color:#1a
       <strong>Pool de funcionários</strong> (<span id="expPool">6%</span> do fat.) é dividido em:<br>
       &nbsp;&nbsp;• Pool executivo (<span id="expExec">30%</span> do pool) → Matheus: prêmio CEO + CTO + CFO<br>
       &nbsp;&nbsp;• Pool de projeto (<span id="expProj">70%</span> do pool) → Gabriel (85,5%) + Matheus (14,5%)<br><br>
-      <strong>Bônus por indicação</strong> (<span id="expBonus">5%</span> do fat. do projeto) → pago ao sócio que trouxe o lead. No modo real, cada projeto tem seu próprio indicador.<br>
+      <strong>Bônus por indicação</strong> (<span id="expBonus">5%</span> do fat. do projeto) → pago ao sócio que trouxe o lead. No modo real, cada projeto tem seu próprio indicador e percentual: sócio pela temperatura do lead (Política de Leads), externo pelo % negociado.<br>
       <strong>Bônus do closer</strong> (2% do projeto) → no modo real, marque em cada projeto se houve closer e quem fechou. Sem closer, nada é pago.<br>
       <strong>Remuneração de Matheus (pro-labore)</strong> = (pool de projeto × 14,5% + pool executivo) ÷ 1,11 → pro-labore bruto<br><br>
       <strong>Participação de lucros</strong> (<span id="expLucro">3%</span> do fat.) é dividida igualmente entre os <span id="expSocios">6</span> sócios = <strong id="expPerSocio">0,5%</strong> cada. Como dividendo, é <strong>isenta de INSS e IRPF</strong>.<br><br>
@@ -1167,9 +1178,37 @@ function fillPartnerSelect(id, emptyLabel) {
   document.getElementById(id).innerHTML = opts.join('');
 }
 
-// Bônus por sócio: indicação (bonusPct × valor → lead, se houver) + closer (2% × valor → closer, se houver).
+// ─────────────────────────────────────────────
+// LEAD BONUS — % por projeto
+// Interno (sócio): % fixo pela temperatura, conforme a aba 🌡️ Política de Leads.
+// Externo: % negociado caso a caso, com o nome de quem recebe.
+// ─────────────────────────────────────────────
+const LEAD_TEMPS = {
+  frio:   { label:'Frio',         pct:1 },
+  morno:  { label:'Morno',        pct:3 },
+  quente: { label:'Quente',       pct:5 },
+  sem:    { label:'Sem conversa', pct:0 }, // sem conversa prévia, sem comissão
+};
+const isExternal = lead => lead === 'outros';
+const fmtPct     = v => String(v).replace('.', ',') + '%';
+
+// "Gabriel · Morno 3%" ou "João · negociado 4%"
+function leadLabel(p) {
+  return isExternal(p.lead)
+    ? `${p.recipient} · negociado ${fmtPct(p.pct)}`
+    : `${PARTNERS[p.lead].label} · ${LEAD_TEMPS[p.temp].label} ${fmtPct(p.pct)}`;
+}
+
+// Campo de % do formulário: nada (sem indicação), temperatura (sócio) ou quem recebe + % (externo)
+function onLeadChange() {
+  const lead = document.getElementById('projLead').value;
+  document.getElementById('projTemp').style.display = lead && !isExternal(lead) ? '' : 'none';
+  document.getElementById('projExt').style.display  = isExternal(lead) ? '' : 'none';
+}
+
+// Bônus por sócio: indicação (% do projeto → lead, se houver) + closer (2% × valor → closer, se houver).
 // Retorna { [sócio]: { lead, closer, total } }.
-function partnerBonuses(projects, bonusPct) {
+function partnerBonuses(projects) {
   const by = {};
   const add = (key, field, v) => {
     const b = by[key] || (by[key] = { lead: 0, closer: 0, total: 0 });
@@ -1177,7 +1216,7 @@ function partnerBonuses(projects, bonusPct) {
     b.total  += v;
   };
   projects.forEach(p => {
-    if (p.lead)   add(p.lead,   'lead',   bonusPct * p.val);
+    if (p.lead)   add(p.lead,   'lead',   p.pct / 100 * p.val);
     if (p.closer) add(p.closer, 'closer', CLOSER_BONUS_PCT / 100 * p.val);
   });
   return by;
@@ -1271,6 +1310,7 @@ function setMode(mode) {
   if (isPlano) calcPlano();
 
   document.getElementById('rowMeta').style.display           = isMeta ? '' : 'none';
+  document.getElementById('rowBonusPct').style.display       = isFat  ? 'none' : ''; // no modo real o % é por projeto
   document.getElementById('rowMatheusRegime').style.display  = isFat  ? '' : 'none';
   document.getElementById('fatSection').style.display        = isFat  ? '' : 'none';
   document.getElementById('bonusPanelSection').style.display = isFat  ? '' : 'none';
@@ -1297,11 +1337,20 @@ function addProject() {
   const val  = parseFloat(document.getElementById('projVal').value);
   const lead   = document.getElementById('projLead').value;   // '' = sem indicação
   const closer = document.getElementById('projCloser').value; // '' = sem closer
-  if (!name || !val || val <= 0) {
-    document.getElementById('projName').focus();
-    return;
-  }
-  projects.push({ id: ++projId, name, val, lead, closer });
+  const ext       = isExternal(lead);
+  const recipient = document.getElementById('projRecipient').value.trim();
+  const pctInput  = document.getElementById('projPct').value;
+  const temp      = document.getElementById('projTemp').value;
+  const invalid = (!name || !(val > 0)) ? 'projName'
+    : (ext && !recipient) ? 'projRecipient'
+    : (ext && (pctInput === '' || pctInput < 0 || pctInput > 100)) ? 'projPct'
+    : null;
+  if (invalid) { document.getElementById(invalid).focus(); return; }
+
+  const leadInfo = !lead ? {}
+    : ext ? { pct: parseFloat(pctInput), recipient }
+    : { pct: LEAD_TEMPS[temp].pct, temp };
+  projects.push({ id: ++projId, name, val, lead, closer, ...leadInfo });
   document.getElementById('projName').value = '';
   document.getElementById('projVal').value  = '';
   document.getElementById('projName').focus();
@@ -1342,7 +1391,7 @@ function renderProjects() {
     return `<div class="proj-row">
       <span class="proj-row-name" title="${p.name}">${p.name}</span>
       <span class="proj-row-val">${fmt(p.val)}</span>
-      ${pt ? `<span class="proj-lead-badge ${pt.badgeCls}" title="Lead">${pt.emoji} ${pt.label}</span>`
+      ${pt ? `<span class="proj-lead-badge ${pt.badgeCls}" title="Lead: ${leadLabel(p)}">${pt.emoji} ${leadLabel(p)}</span>`
            : `<span class="proj-badge-none">sem indicação</span>`}
       ${ct ? `<span class="proj-lead-badge ${ct.badgeCls}" title="Closer (${CLOSER_BONUS_PCT}%)">🤝 ${ct.label}</span>`
            : `<span class="proj-badge-none">sem closer</span>`}
@@ -1466,8 +1515,8 @@ function calc() {
   let fatR = 0, bonusByPartner = {}, gabrielBonus = 0;
   if (isFatMode) {
     fatR = projects.reduce((s,p) => s + p.val, 0);
-    // Bônus por projeto: indicação → lead, 2% → closer (se houver)
-    bonusByPartner = partnerBonuses(projects, bonusPct);
+    // Bônus por projeto: % do próprio projeto → lead, 2% → closer (se houver)
+    bonusByPartner = partnerBonuses(projects);
     gabrielBonus = bonusByPartner.gabriel ? bonusByPartner.gabriel.total : 0;
 
     // Update project footer
@@ -1529,7 +1578,7 @@ function calc() {
     const fatLabel  = isFatMode ? 'faturamento informado' : 'faturamento/mês necessário';
     const bestTag   = isFatMode ? '★ MELHOR REGIME GABRIEL' : '★ MAIOR TOTAL MATHEUS';
     const bonusLabel = isFatMode
-      ? `Bônus Gabriel (leads ${parseFloat(document.getElementById('sBonus').value)}% + closer)`
+      ? `Bônus Gabriel (leads + closer)`
       : `Bônus de leads (${parseFloat(document.getElementById('sBonus').value)}%)`;
 
     cardsHtml += `
@@ -1657,17 +1706,14 @@ function renderBonusPanel() {
   const bonusPanelSection = document.getElementById('bonusPanelSection');
   if (currentMode !== 'fat') { bonusPanelSection.style.display = 'none'; return; }
 
-  const bonusPct = parseFloat(document.getElementById('sBonus').value) / 100;
+  const bonusByPartner = partnerBonuses(projects);
 
-  const bonusByPartner = partnerBonuses(projects, bonusPct);
-
-  const partnerKeys = Object.keys(bonusByPartner);
+  const partnerKeys = Object.keys(bonusByPartner).filter(k => bonusByPartner[k].total > 0);
   if (partnerKeys.length === 0) { bonusPanelSection.style.display = 'none'; return; }
 
   bonusPanelSection.style.display = 'block';
-  const bonusPctVal = parseFloat(document.getElementById('sBonus').value);
   document.getElementById('bonusPanelSub').textContent =
-    `${bonusPctVal}% do projeto para quem trouxe o lead + ${CLOSER_BONUS_PCT}% para o closer (quando houver) · ${partnerKeys.length} sócio${partnerKeys.length>1?'s':''} com bônus este mês`;
+    `Indicação: sócios pela temperatura do lead (Política de Leads), externos pelo % negociado + ${CLOSER_BONUS_PCT}% para o closer (quando houver) · ${partnerKeys.length} indicador${partnerKeys.length>1?'es':''} com bônus este mês`;
 
   const sorted = [...partnerKeys].sort((a,b) => {
     if (a==='outros' && b!=='outros') return 1;
@@ -1682,10 +1728,10 @@ function renderBonusPanel() {
     const bonus  = pb.total;
     const myProj = projects.filter(p => p.lead === key || p.closer === key);
     const myFat  = projects.filter(p => p.lead === key).reduce((s,p) => s+p.val, 0);
-    const role   = p => [p.lead === key && 'lead', p.closer === key && 'closer'].filter(Boolean).join(' + ');
+    const role   = p => [p.lead === key && `lead ${fmtPct(p.pct)}`, p.closer === key && `closer ${CLOSER_BONUS_PCT}%`].filter(Boolean).join(' + ');
     // Separação indicação / closer (só aparece quando há closer)
     const splitHtml = pb.closer ? `
-          <div class="bbd-row"><span>Indicação (${bonusPctVal}%)</span><span>${fmt(pb.lead)}</span></div>
+          <div class="bbd-row"><span>Indicação</span><span>${fmt(pb.lead)}</span></div>
           <div class="bbd-row"><span>Closer (${CLOSER_BONUS_PCT}%)</span><span>${fmt(pb.closer)}</span></div>` : '';
     const isOut  = key === 'outros';
     const isGab  = key === 'gabriel';
@@ -1711,7 +1757,7 @@ function renderBonusPanel() {
           ${splitHtml}
           <div class="bbd-row"><span>Custo externo (bruto)</span><span>${fmt(bonus)}</span></div>
         </div>
-        <div class="bonus-outros-note" style="margin-top:6px">⚠️ Indicação externa — verificar acordo comercial</div>`;
+        <div class="bonus-outros-note" style="margin-top:6px">⚠️ % negociado por projeto — conferir acordo com cada indicador</div>`;
     } else if (isGab) {
       breakdownHtml = `
         <div class="bonus-breakdown">
@@ -1744,7 +1790,7 @@ function renderBonusPanel() {
       <ul class="bonus-proj-list">
         ${myProj.map(p=>`
           <li>
-            <span class="bonus-proj-item-name" title="${p.name} (${role(p)})">${p.name} · ${role(p)}</span>
+            <span class="bonus-proj-item-name" title="${p.name} (${role(p)})">${role(p)} · ${p.lead === key && isExternal(key) ? `${p.recipient} (${p.name})` : p.name}</span>
             <span class="bonus-proj-item-val">${fmt(p.val)}</span>
           </li>`).join('')}
       </ul>
@@ -1843,6 +1889,8 @@ function calcPlano(){
 
 fillPartnerSelect('projLead', '🚫 Sem indicação');
 fillPartnerSelect('projCloser', '🤝 Sem closer');
+document.getElementById('projTemp').innerHTML = Object.entries(LEAD_TEMPS)
+  .map(([key, t]) => `<option value="${key}">🌡️ ${t.label} · ${fmtPct(t.pct)}</option>`).join('');
 calc();
 </script>
 </body>
