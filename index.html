@@ -1241,7 +1241,7 @@ let partnerRegimes = {
 // ─────────────────────────────────────────────
 // BONUS REGIME HELPERS
 // ─────────────────────────────────────────────
-// MEI is Gabriel-only (scenario cards). Other partners: Pro-labore or PJ AN.III only.
+// All partners (incl. Gabriel): Pro-labore or PJ AN.III only. MEI is not allowed for partners.
 const REGIMES_BONUS = [
   { key:'prolabore', label:'Pro-labore' },
   { key:'pjiii',    label:'PJ AN.III'  },
@@ -1263,10 +1263,6 @@ function calcBonusNet(bonusCompanyCost, regime) {
     const net    = gross - inssP;
     return { regime:'prolabore', gross, encCo, inssP, net,
              encLabel:'Encargos patronais (11%)', impLabel:'INSS pessoal (11%)' };
-  } else if (regime === 'pjmei') {
-    const tax = bonusCompanyCost * 0.015;
-    return { regime:'pjmei', gross:bonusCompanyCost, encCo:0, inssP:tax, net:bonusCompanyCost-tax,
-             encLabel:'', impLabel:'DAS MEI (1,5%)' };
   } else { // pjiii
     const tax = bonusCompanyCost * 0.06;
     return { regime:'pjiii', gross:bonusCompanyCost, encCo:0, inssP:tax, net:bonusCompanyCost-tax,
@@ -1411,8 +1407,6 @@ function fmt(v){ return 'R$ '+v.toLocaleString('pt-BR', { minimumFractionDigits:
 const gabRegimes = [
   {key:'g-pl',  name:'Pro-labore',         badgeText:'Pro-labore',
    badgeBg:'#ede9fe', badgeColor:'#5b21b6', rate:0.11, inssEmp:0.11, useLiq:false, isPJ:false},
-  {key:'g-pjm', name:'PJ · MEI',            badgeText:'PJ MEI',
-   badgeBg:'#fef3c7', badgeColor:'#92400e', rate:0.015,inssEmp:0.0,  useLiq:true,  isPJ:true},
   {key:'g-pj3', name:'PJ · Simples AN. III',badgeText:'PJ AN.III',
    badgeBg:'#dbeafe', badgeColor:'#1e40af', rate:0.06, inssEmp:0.0,  useLiq:true,  isPJ:true},
 ];
