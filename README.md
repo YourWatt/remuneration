@@ -46,8 +46,7 @@ Pool de projeto = restante do pool total
 | Regime | Encargo | Observação |
 |--------|---------|------------|
 | **Pro-labore** | 11% patronal + 11% INSS pessoal | Regime padrão de sócio |
-| **PJ · MEI** | DAS 1,5% | Limite de faturamento MEI aplica-se |
-| **PJ · Simples AN. III** | ~6% efetivo | Para operações acima do teto MEI |
+| **PJ · Simples AN. III** | ~6% efetivo | Sócio não pode abrir MEI; PJ sempre pelo Simples AN. III |
 
 ### Regime de Matheus (modo Faturamento Real)
 | Regime | Cálculo |
@@ -64,7 +63,7 @@ No modo Faturamento Real, cada projeto tem um responsável pelo lead — ou **Se
 | **Externo** | Nome digitado no projeto | **Negociado** caso a caso (0–100%) |
 
 Os percentuais internos ficam numa única constante (`LEAD_TEMPS` no `index.html`) — se a política mudar, altere só ali. O slider global de % bônus vale apenas no modo Meta.
-O bônus de sócios sofre dedução conforme o regime de recebimento (Pro-labore ou PJ AN.III); MEI disponível apenas para Gabriel. Bônus externos aparecem como custo bruto, com o nome e o % de cada indicador.
+O bônus de sócios sofre dedução conforme o regime de recebimento (Pro-labore ou PJ AN.III); MEI não é opção (sócio de empresa não pode abrir MEI). Bônus externos aparecem como custo bruto, com o nome e o % de cada indicador.
 
 ### Bônus do closer (modo Faturamento Real)
 Cada projeto tem um campo **Closer 2%**: escolha *Sem closer* ou o sócio que fechou o projeto.
